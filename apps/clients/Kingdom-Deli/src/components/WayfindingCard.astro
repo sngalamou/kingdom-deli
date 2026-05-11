@@ -1,0 +1,80 @@
+---
+// WayfindingCard — Cinemark-entrance directional callout for Louis Joliet Mall food court.
+// Local to Kingdom Deli. Replaces the generic shared MapDirections component
+// because the Cinemark-entrance shortcut is specific enough to deserve its own treatment.
+
+interface Props {
+  /** Override default heading. */
+  heading?: string;
+}
+
+const { heading = 'Fastest way in' } = Astro.props;
+---
+
+<aside class="wayfinding-card">
+  <div class="wayfinding-card__rule" aria-hidden="true"></div>
+  <h3 class="wayfinding-card__heading">{heading}</h3>
+  <p class="wayfinding-card__direction">
+    Park near <strong>Cinemark</strong>. Enter through the cinema doors.
+    The food court is straight ahead — Kingdom Deli is on the right.
+  </p>
+  <p class="wayfinding-card__address">
+    Louis Joliet Mall<br />
+    3340 Mall Loop Dr, Joliet, IL 60431
+  </p>
+</aside>
+
+<style>
+  /* Old-school deli directory card.
+   * Boxed, mustard offset shadow (like a sign printed on a press),
+   * uppercase slab heading, deep-red emphasis on the entrance keyword. */
+  .wayfinding-card {
+    position: relative;
+    background: var(--color-cream-100, #f7f1de);
+    border: 2px solid var(--color-charcoal-900, #15110d);
+    padding: 1.5rem 1.75rem 1.75rem;
+    max-width: 28rem;
+    color: var(--color-charcoal-900, #15110d);
+    box-shadow: 6px 6px 0 var(--color-mustard-500, #d4a017);
+  }
+
+  .wayfinding-card__rule {
+    position: absolute;
+    top: 0.4rem;
+    left: 0.4rem;
+    right: 0.4rem;
+    height: 1px;
+    background: var(--color-charcoal-900, #15110d);
+    opacity: 0.4;
+  }
+
+  .wayfinding-card__heading {
+    font-family: var(--font-display, 'Alfa Slab One', Georgia, serif);
+    font-size: 1.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin: 0 0 0.5rem;
+  }
+
+  .wayfinding-card__direction {
+    font-family: var(--font-body, Vollkorn, Georgia, serif);
+    font-size: 1.0625rem;
+    line-height: 1.55;
+    margin: 0 0 1rem;
+  }
+
+  .wayfinding-card__direction strong {
+    color: var(--color-meatred-500, #a32424);
+    font-weight: 700;
+  }
+
+  .wayfinding-card__address {
+    font-family: var(--font-body, Vollkorn, Georgia, serif);
+    font-size: 0.875rem;
+    line-height: 1.45;
+    opacity: 0.75;
+    margin: 0;
+    border-top: 1px dashed currentColor;
+    padding-top: 0.75rem;
+  }
+</style>

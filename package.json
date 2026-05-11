@@ -1,0 +1,23 @@
+{
+  "name": "ngc-monorepo",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Ngalamou Consultancy productized client delivery monorepo. Shared packages + per-client workspaces.",
+  "packageManager": "pnpm@9.0.0",
+  "scripts": {
+    "dev": "turbo run dev",
+    "build": "turbo run build",
+    "lint": "turbo run lint",
+    "check": "turbo run check",
+    "clean": "turbo run clean && rm -rf node_modules"
+  },
+  "devDependencies": {
+    "turbo": "^2.0.0",
+    "typescript": "^5.4.0",
+    "prettier": "^3.3.0"
+  },
+  "engines": {
+    "node": ">=20.0.0",
+    "pnpm": ">=9.0.0"
+  }
+}

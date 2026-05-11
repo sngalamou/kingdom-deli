@@ -1,0 +1,28 @@
+{
+  "name": "@ngc/kingdom-deli",
+  "version": "0.1.0",
+  "private": true,
+  "ngcVariant": "small-commerce-restaurant",
+  "description": "Kingdom Deli marketing site + Square commerce integration. Louis Joliet Mall food court.",
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "check": "astro check",
+    "test": "echo \"smoke tests TODO\" && exit 0"
+  },
+  "dependencies": {
+    "@ngc/ui": "workspace:*",
+    "@ngc/config": "workspace:*",
+    "@ngc/sanity-schemas": "workspace:*",
+    "@ngc/square": "workspace:*",
+    "astro": "^4.0.0",
+    "@astrojs/sanity": "^0.4.0",
+    "@astrojs/tailwind": "^5.1.0",
+    "tailwindcss": "^3.4.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.4.0"
+  }
+}

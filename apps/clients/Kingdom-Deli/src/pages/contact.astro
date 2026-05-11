@@ -1,0 +1,27 @@
+---
+// Contact — Form + direct channels (phone / email TBD pending Henry).
+import BaseLayout from '@ngc/ui/layouts/BaseLayout.astro';
+import ContactForm from '@ngc/ui/components/ContactForm.astro';
+---
+
+<BaseLayout title="Contact — Kingdom Deli">
+  <header class="contact-header">
+    <h1>Get in touch</h1>
+    <p>
+      {/* TODO: Voice-driven blurb — catering, special orders, press, general questions. */}
+    </p>
+  </header>
+
+  <section class="contact-direct">
+    <h2>Direct</h2>
+    {/* TODO: Confirm with Henry — direct phone? Email? Or just the mall counter?
+        Mall main line: (815) 676-5001 — falls back here ONLY if Henry has no direct line. */}
+    <p>Phone: <em>TBD &mdash; pending Henry's direct line</em></p>
+    <p>Email: <em>TBD</em></p>
+  </section>
+
+  <section class="contact-form">
+    <h2>Send a message</h2>
+    <ContactForm endpoint={import.meta.env.PUBLIC_CONTACT_FORM_ENDPOINT} />
+  </section>
+</BaseLayout>
