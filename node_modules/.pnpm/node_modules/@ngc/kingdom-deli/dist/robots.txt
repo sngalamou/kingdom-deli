@@ -1,0 +1,5 @@
+# Kingdom Deli — V0 staging.
+# Blocking indexing until launch. Replace before going live on July 11, 2026.
+
+User-agent: *
+Disallow: /

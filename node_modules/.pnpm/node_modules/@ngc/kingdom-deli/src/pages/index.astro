@@ -1,0 +1,47 @@
+---
+// Home — Kingdom Deli
+// TODO: Wire Sanity queries for hero copy, featured menu items, hours.
+import BaseLayout from '@ngc/ui/layouts/BaseLayout.astro';
+import Hero from '@ngc/ui/components/Hero.astro';
+import HoursBlock from '@ngc/ui/components/HoursBlock.astro';
+import MenuItem from '@ngc/ui/components/MenuItem.astro';
+import NoPorkBadge from '../components/NoPorkBadge.astro';
+import WayfindingCard from '../components/WayfindingCard.astro';
+---
+
+<BaseLayout title="Kingdom Deli — Wholistic, Good Food. Louis Joliet Mall.">
+  <!-- HERO -->
+  <Hero>
+    {/* TODO: Final hero copy. Direction: Maxwell Street heritage + "wholistic, good food" tagline. */}
+    <h1 slot="headline">Wholistic, good food.</h1>
+    <p slot="subhead">
+      Old-school Chicago deli + bakery in the Louis Joliet Mall food court.
+    </p>
+    <a slot="cta-primary" href="/order">Order pickup</a>
+    <a slot="cta-secondary" href="/menu">See the menu</a>
+  </Hero>
+
+  <!-- SIGNATURE / FEATURED -->
+  <section class="section section--featured">
+    {/* TODO: Featured items from Sanity (where featured == true).
+        Should always include Chicago Lunchroom Butter Cookies as a signature anchor. */}
+  </section>
+
+  <!-- BRAND BLURB -->
+  <section class="section section--brand">
+    {/* TODO: Short brand voice paragraph — Maxwell Street nod, family deli energy.
+        Mention the no-pork-on-my-fork line as an honest product-level promise on the
+        Vienna Beef line, not as a site-wide claim. */}
+  </section>
+
+  <!-- LOCATION + HOURS -->
+  <section class="section section--location">
+    <HoursBlock />
+    <WayfindingCard />
+  </section>
+
+  <!-- ORDER CTA (closing) -->
+  <section class="section section--cta">
+    {/* TODO: Closing CTA — split between "Order online" and "Visit us at the food court." */}
+  </section>
+</BaseLayout>

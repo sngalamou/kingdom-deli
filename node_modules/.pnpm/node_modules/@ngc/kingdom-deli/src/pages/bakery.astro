@@ -1,0 +1,26 @@
+---
+// Bakery — Specialty cakes, cheesecakes, Chicago Lunchroom Butter Cookies.
+// Pickup-at-mall fulfillment at V1; shipping toggle deferred (see ADR 0002).
+import BaseLayout from '@ngc/ui/layouts/BaseLayout.astro';
+import { SquareShopEmbed } from '@ngc/square';
+---
+
+<BaseLayout title="Bakery — Specialty Cakes, Cheesecakes & Chicago Lunchroom Butter Cookies">
+  <header class="bakery-header">
+    <h1>The bakery</h1>
+    <p>
+      {/* TODO: Bakery voice — baked-ahead daily, lunchroom butter cookie story, pickup at the food court. */}
+    </p>
+  </header>
+
+  <SquareShopEmbed
+    locationId={import.meta.env.PUBLIC_SQUARE_LOCATION_ID}
+    categoryFilter="bakery"
+    fulfillment="pickup"
+  />
+
+  <section class="bakery-story">
+    {/* TODO: Lunchroom butter cookie origin / story callout.
+        Strongest brand asset in the bakery line — give it real estate. */}
+  </section>
+</BaseLayout>
