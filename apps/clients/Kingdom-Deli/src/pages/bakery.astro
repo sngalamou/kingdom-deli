@@ -3,9 +3,10 @@
 // Pickup-at-mall fulfillment at V1; shipping toggle deferred (see ADR 0002).
 import BaseLayout from '@ngc/ui/layouts/BaseLayout.astro';
 import { SquareShopEmbed } from '@ngc/square';
+import site from '../content/site.json';
 ---
 
-<BaseLayout title="Bakery — Specialty Cakes, Cheesecakes & Chicago Lunchroom Butter Cookies">
+<BaseLayout title="Bakery — Specialty Cakes, Cheesecakes & Chicago Lunchroom Butter Cookies" brand={site.brand} footerTagline={site.footerTagline}>
   <header class="bakery-header">
     <h1>The bakery</h1>
     <p>
