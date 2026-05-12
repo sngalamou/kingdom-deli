@@ -4,7 +4,7 @@ import BaseLayout from '@ngc/ui/layouts/BaseLayout.astro';
 import { SquareOrderEmbed } from '@ngc/square';
 ---
 
-<BaseLayout title="Order pickup — Kingdom Deli">
+<BaseLayout title="Order pickup — Kingdom Deli"  brand={site.brand} footerTagline={site.footerTagline}>
   <header class="order-header">
     <h1>Order for pickup</h1>
     <p>
@@ -20,4 +20,5 @@ import { SquareOrderEmbed } from '@ngc/square';
   <section class="order-footer">
     {/* TODO: Below-fold content — hours, what to expect, how pickup works at the food court counter. */}
   </section>
+  
 </BaseLayout>
