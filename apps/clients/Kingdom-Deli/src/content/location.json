@@ -1,0 +1,30 @@
+{
+  "name": "Kingdom Deli",
+  "parentVenue": "Louis Joliet Mall",
+  "address": {
+    "street": "3340 Mall Loop Dr",
+    "city": "Joliet",
+    "state": "IL",
+    "postalCode": "60431",
+    "country": "United States"
+  },
+  "entranceNote": "Enter through the Cinemark theater doors — the food court is straight ahead. Kingdom Deli is on the right.",
+  "parking": {
+    "spaces": 4600,
+    "notes": "Park near Cinemark for the shortest walk."
+  },
+  "phone": "TBD",
+  "email": "TBD",
+  "timezone": "America/Chicago",
+  "hours": [
+    { "day": "mon", "open": "11:00", "close": "19:00" },
+    { "day": "tue", "open": "11:00", "close": "19:00" },
+    { "day": "wed", "open": "11:00", "close": "19:00" },
+    { "day": "thu", "open": "11:00", "close": "19:00" },
+    { "day": "fri", "open": "10:00", "close": "20:00" },
+    { "day": "sat", "open": "10:00", "close": "20:00" },
+    { "day": "sun", "open": "11:00", "close": "18:00" }
+  ],
+  "mapUrl": "https://www.google.com/maps?q=Louis+Joliet+Mall,+3340+Mall+Loop+Dr,+Joliet,+IL+60431",
+  "mapEmbedUrl": "https://www.google.com/maps?q=Louis+Joliet+Mall,+3340+Mall+Loop+Dr,+Joliet,+IL+60431&output=embed"
+}

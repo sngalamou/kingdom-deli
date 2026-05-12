@@ -1,0 +1,48 @@
+{
+  "category": {
+    "name": "From the Deli",
+    "slug": "deli",
+    "displayOrder": 1,
+    "description": "Sliced thin, piled high. The way it should be."
+  },
+  "items": [
+    {
+      "id": "corned-beef",
+      "name": "Corned Beef Sandwich",
+      "description": "Slow-cooked corned beef, hand-sliced, on rye with deli mustard.",
+      "price": 12.95,
+      "noPork": true,
+      "squareSku": "DELI-CB-01",
+      "available": true,
+      "featured": true
+    },
+    {
+      "id": "pastrami",
+      "name": "Pastrami Sandwich",
+      "description": "House-spiced pastrami on rye. Brown mustard, half-sour pickle.",
+      "price": 13.50,
+      "noPork": true,
+      "squareSku": "DELI-PS-01",
+      "available": true,
+      "featured": true
+    },
+    {
+      "id": "corned-beef-reuben",
+      "name": "Corned Beef Reuben",
+      "description": "Corned beef, Swiss, sauerkraut, Russian dressing, grilled rye.",
+      "price": 13.95,
+      "noPork": true,
+      "squareSku": "DELI-CBR-01",
+      "available": true
+    },
+    {
+      "id": "double-stack",
+      "name": "The Double Stack",
+      "description": "Corned beef and pastrami together, the way the regulars order.",
+      "price": 15.95,
+      "noPork": true,
+      "squareSku": "DELI-DS-01",
+      "available": true
+    }
+  ]
+}

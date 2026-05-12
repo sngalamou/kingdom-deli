@@ -1,0 +1,46 @@
+{
+  "category": {
+    "name": "Sides",
+    "slug": "sides",
+    "displayOrder": 4,
+    "description": ""
+  },
+  "items": [
+    {
+      "id": "fries",
+      "name": "Fries",
+      "description": "Hand-cut, fried crisp, salted.",
+      "price": 3.95,
+      "noPork": true,
+      "squareSku": "SIDE-FR-01",
+      "available": true
+    },
+    {
+      "id": "loaded-fries",
+      "name": "Cheese Fries",
+      "description": "Fries with melted cheddar.",
+      "price": 5.50,
+      "noPork": true,
+      "squareSku": "SIDE-CF-01",
+      "available": true
+    },
+    {
+      "id": "pickle",
+      "name": "Half-Sour Pickle",
+      "description": "Cold from the brine.",
+      "price": 1.50,
+      "noPork": true,
+      "squareSku": "SIDE-PK-01",
+      "available": true
+    },
+    {
+      "id": "slaw",
+      "name": "Slaw",
+      "description": "Cabbage, vinegar dressing, light on the mayo.",
+      "price": 2.95,
+      "noPork": true,
+      "squareSku": "SIDE-SL-01",
+      "available": true
+    }
+  ]
+}

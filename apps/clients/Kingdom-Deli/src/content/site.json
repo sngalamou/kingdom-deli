@@ -1,0 +1,33 @@
+{
+  "brand": "Kingdom Deli",
+  "tagline": "Wholistic, good food.",
+  "subTagline": "An old-school Chicago deli and bakery counter, set up in the Louis Joliet Mall food court.",
+  "footerTagline": "Wholistic, good food. Louis Joliet Mall.",
+  "openingDate": "2026-07-11",
+  "openingDateDisplay": "July 11, 2026",
+  "voice": {
+    "do": [
+      "Plain words. Short sentences.",
+      "Talk like the counter, not the boardroom.",
+      "Specific over general. ('Pink-frosted butter cookies' beats 'baked goods.')",
+      "Confident, warm, never pleading."
+    ],
+    "dont": [
+      "No corporate filler. No 'eatery,' 'eats,' 'curated experience.'",
+      "No emojis on the site.",
+      "No site-wide claims we can't make item-by-item.",
+      "No exclamation marks unless something deserves one."
+    ]
+  },
+  "social": {
+    "instagram": "",
+    "facebook": "",
+    "tiktok": ""
+  },
+  "ctaCopy": {
+    "orderPrimary": "Order pickup",
+    "orderSecondary": "See the menu",
+    "twoWaysIn": "Two ways in. Order ahead for pickup, or come find us at the counter."
+  },
+  "noPorkExplainer": "A small stamp marks items on our all-beef line — Vienna Beef hot dogs and Polish, our corned beef and pastrami. Item by item, not a slogan."
+}

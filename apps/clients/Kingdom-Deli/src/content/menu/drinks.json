@@ -1,0 +1,37 @@
+{
+  "category": {
+    "name": "Drinks",
+    "slug": "drinks",
+    "displayOrder": 5,
+    "description": ""
+  },
+  "items": [
+    {
+      "id": "fountain",
+      "name": "Fountain Soda",
+      "description": "Coke, Diet Coke, Sprite, root beer, lemonade. Free refills at the counter.",
+      "price": 2.95,
+      "noPork": true,
+      "squareSku": "DRK-FT-01",
+      "available": true
+    },
+    {
+      "id": "bottled-water",
+      "name": "Bottled Water",
+      "description": "",
+      "price": 2.00,
+      "noPork": true,
+      "squareSku": "DRK-WT-01",
+      "available": true
+    },
+    {
+      "id": "iced-tea",
+      "name": "Fresh Iced Tea",
+      "description": "Unsweetened or sweet, brewed daily.",
+      "price": 2.95,
+      "noPork": true,
+      "squareSku": "DRK-IT-01",
+      "available": true
+    }
+  ]
+}

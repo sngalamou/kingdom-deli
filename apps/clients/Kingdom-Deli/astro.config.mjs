@@ -1,6 +1,6 @@
 import { defineConfig } from 'astro/config';
 import tailwind from '@astrojs/tailwind';
-import sanity from '@astrojs/sanity';
+import sanity from '@sanity/astro';
 import { ngcAstroBase } from '@ngc/config/astro';
 
 // Kingdom Deli site config — extends @ngc/config's small-commerce-restaurant base.

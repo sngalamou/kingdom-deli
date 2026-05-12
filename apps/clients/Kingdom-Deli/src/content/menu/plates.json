@@ -1,0 +1,47 @@
+{
+  "category": {
+    "name": "Plates",
+    "slug": "plates",
+    "displayOrder": 3,
+    "description": "Heartier sit-down options."
+  },
+  "items": [
+    {
+      "id": "jerk-chicken-plate",
+      "name": "Jerk Chicken Plate",
+      "description": "Slow-marinated jerk chicken, rice and peas, plantains, slaw.",
+      "price": 13.95,
+      "noPork": true,
+      "squareSku": "PLT-JERK-01",
+      "available": true,
+      "featured": true
+    },
+    {
+      "id": "jerk-chicken-sandwich",
+      "name": "Jerk Chicken Sandwich",
+      "description": "Jerk chicken thigh on a brioche bun, slaw, jerk aioli.",
+      "price": 11.95,
+      "noPork": true,
+      "squareSku": "PLT-JERKSW-01",
+      "available": true
+    },
+    {
+      "id": "beef-tacos",
+      "name": "Beef Tacos (3)",
+      "description": "Seasoned ground beef, onion, cilantro, lime, choice of corn or flour.",
+      "price": 9.95,
+      "noPork": true,
+      "squareSku": "PLT-TACO-01",
+      "available": true
+    },
+    {
+      "id": "chicken-tacos",
+      "name": "Chicken Tacos (3)",
+      "description": "Grilled chicken, salsa verde, onion, cilantro, lime.",
+      "price": 9.95,
+      "noPork": true,
+      "squareSku": "PLT-TACOCHX-01",
+      "available": true
+    }
+  ]
+}

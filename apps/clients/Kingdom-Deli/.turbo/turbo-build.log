@@ -1,0 +1,14 @@
+[6n[m]0;C:\Windows\system32\cmd.exe[?25hTypeError: fetch failed
+    at Object.processResponse (file:///C:/Users/sngalamou/AppData/Local/pnpm/store/v11/links/@/pnpm/11.1.0/33deae4d52acca73efc17ce122dda7d57192e77f814ebb31c67b2e74411d6252/node_modules/pnpm/dist/pnpm.mjs:102652:20)
+    at file:///C:/Users/sngalamou/AppData/Local/pnpm/store/v11/links/@/pnpm/11.1.0/33deae4d52acca73efc17ce122dda7d57192e77f814ebb31c67b2e74411d6252/node_modules/pnpm/dist/pnpm.mjs:103033:23
+    at node:internal/process/task_queues:149:7
+    at AsyncResource.runInAsyncScope (node:async_hooks:214:14)
+    at AsyncResource.runMicrotask (node:internal/process/task_queues:146:8)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+TypeError: fetch failed
+    at Object.processResponse (file:///C:/Users/sngalamou/AppData/Local/pnpm/store/v11/links/@/pnpm/11.1.0/33deae4d52acca73efc17ce122dda7d57192e77f814ebb31c67b2e74411d6252/node_modules/pnpm/dist/pnpm.mjs:102652:20)
+    at file:///C:/Users/sngalamou/AppData/Local/pnpm/store/v11/links/@/pnpm/11.1.0/33deae4d52acca73efc17ce122dda7d57192e77f814ebb31c67b2e74411d6252/node_modules/pnpm/dist/pnpm.mjs:103033:23
+    at node:internal/process/task_queues:149:7
+    at AsyncResource.runInAsyncScope (node:async_hooks:214:14)
+    at AsyncResource.runMicrotask (node:internal/process/task_queues:146:8)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)

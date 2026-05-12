@@ -1,0 +1,89 @@
+---
+// @ngc/ui/components/Hero
+//
+// Generous hero block with named slots:
+//   <slot name="headline" />     — h1, default font-display
+//   <slot name="subhead" />      — paragraph, lead size
+//   <slot name="cta-primary" />  — first action; rendered as filled button
+//   <slot name="cta-secondary"/> — second action; rendered as outlined button
+//
+// Styles target slotted <a> elements via the slot-wrapper classes so consumers
+// can pass any link-like element without per-page CSS.
+---
+
+<section class="hero">
+  <div class="hero-content">
+    <slot name="headline">
+      <h1>Welcome</h1>
+    </slot>
+    <div class="hero-subhead">
+      <slot name="subhead" />
+    </div>
+    <div class="hero-ctas">
+      <span class="hero-cta hero-cta--primary">
+        <slot name="cta-primary" />
+      </span>
+      <span class="hero-cta hero-cta--secondary">
+        <slot name="cta-secondary" />
+      </span>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    padding: var(--space-24) var(--space-6) var(--space-16);
+    border-bottom: var(--border-heavy);
+    background: var(--color-bg);
+  }
+  .hero-content { max-width: 64rem; }
+  .hero :global(h1) {
+    font-family: var(--font-display);
+    font-size: var(--fs-display-1);
+    line-height: var(--lh-tight);
+    letter-spacing: var(--tracking-display);
+    margin: 0 0 var(--space-4);
+    color: var(--color-text);
+  }
+  .hero-subhead {
+    font-size: var(--fs-lead);
+    line-height: var(--lh-snug);
+    color: var(--color-text-muted);
+    max-width: 40rem;
+    margin: 0 0 var(--space-8);
+  }
+  .hero-subhead :global(p) { margin: 0; }
+  .hero-ctas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-4);
+  }
+  .hero-cta :global(a) {
+    display: inline-block;
+    padding: var(--space-3) var(--space-6);
+    font-family: var(--font-display);
+    font-size: var(--fs-body);
+    text-decoration: none;
+    letter-spacing: var(--tracking-uppercase);
+    text-transform: uppercase;
+    border: var(--border-heavy);
+    transition: transform 150ms ease, background 150ms ease, color 150ms ease;
+  }
+  .hero-cta--primary :global(a) {
+    background: var(--color-accent);
+    color: var(--color-bg);
+  }
+  .hero-cta--primary :global(a:hover) { transform: translateY(-1px); }
+  .hero-cta--secondary :global(a) {
+    background: transparent;
+    color: var(--color-text);
+  }
+  .hero-cta--secondary :global(a:hover) {
+    background: var(--color-text);
+    color: var(--color-bg);
+  }
+  @media (max-width: 640px) {
+    .hero { padding: var(--space-16) var(--space-4) var(--space-12); }
+    .hero :global(h1) { font-size: var(--fs-display-2); }
+  }
+</style>

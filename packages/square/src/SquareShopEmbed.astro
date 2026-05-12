@@ -1,0 +1,95 @@
+---
+// @ngc/square/SquareShopEmbed
+//
+// Renders Square Online's shop surface (retail/baked-goods sales).
+// Same fallback pattern as SquareOrderEmbed — friendly placeholder when not yet wired.
+
+interface Props {
+  /** Full Square Online site URL, e.g. https://kingdomdeli.square.site */
+  siteUrl?: string;
+  /** Path to append for the shop or category. Defaults to '/s/shop'. */
+  shopPath?: string;
+  /** Optional category filter (e.g. 'bakery'). Used when shopPath supports a slug. */
+  categoryFilter?: string;
+  locationId?: string;
+  fulfillment?: 'pickup' | 'shipping' | 'both';
+  comingSoonMessage?: string;
+  comingSoonDate?: string;
+  height?: number;
+}
+
+const {
+  siteUrl = import.meta.env.PUBLIC_SQUARE_SITE_URL,
+  shopPath = '/s/shop',
+  categoryFilter,
+  comingSoonMessage = 'The bakery shop is opening soon. Cakes, cheesecakes, and butter cookies — fresh from the counter.',
+  comingSoonDate,
+  height = 900,
+} = Astro.props;
+
+const hasSite = Boolean(siteUrl);
+const shopUrl = hasSite
+  ? `${siteUrl}${shopPath}${categoryFilter ? `?category=${encodeURIComponent(categoryFilter)}` : ''}`
+  : null;
+---
+
+{hasSite && shopUrl ? (
+  <div class="square-shop-embed">
+    <iframe
+      src={shopUrl}
+      title="Shop"
+      width="100%"
+      height={height}
+      loading="lazy"
+      allow="payment"
+    ></iframe>
+    <p class="square-shop-fallback">
+      Trouble loading? <a href={shopUrl} target="_blank" rel="noopener">Open the shop directly</a>.
+    </p>
+  </div>
+) : (
+  <div class="square-coming-soon">
+    <p class="coming-soon-message">{comingSoonMessage}</p>
+    {comingSoonDate && <p class="coming-soon-date">Opens {comingSoonDate}</p>}
+  </div>
+)}
+
+<style>
+  .square-shop-embed {
+    width: 100%;
+    max-width: 64rem;
+    margin: 0 auto;
+  }
+  .square-shop-embed iframe {
+    width: 100%;
+    border: 0;
+    background: var(--color-bg);
+  }
+  .square-shop-fallback {
+    font-size: var(--fs-small);
+    color: var(--color-text-muted);
+    text-align: center;
+    margin: var(--space-3) 0 0;
+  }
+  .square-coming-soon {
+    max-width: 36rem;
+    margin: var(--space-12) auto;
+    padding: var(--space-12) var(--space-6);
+    text-align: center;
+    border: var(--border-heavy);
+    background: var(--color-surface);
+  }
+  .coming-soon-message {
+    font-family: var(--font-display);
+    font-size: var(--fs-h2);
+    line-height: var(--lh-tight);
+    margin: 0 0 var(--space-3);
+    color: var(--color-text);
+  }
+  .coming-soon-date {
+    font-family: var(--font-body);
+    font-size: var(--fs-body);
+    color: var(--color-text-muted);
+    margin: 0;
+  }
+</style>

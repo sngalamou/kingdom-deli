@@ -1,0 +1,77 @@
+/* Kingdom Deli — globals.
+ *
+ * Light reset + prose defaults. Component-specific styling lives in each
+ * component's <style> block. This file is for things that need to be global:
+ * box-sizing, link defaults, list resets in nav contexts.
+ *
+ * Imported by BaseLayout indirectly via tokens.css cascade — load order:
+ *   1. @ngc/config/tokens.css (base layer)
+ *   2. apps/clients/kingdom-deli/src/styles/tokens.css (client layer)
+ *   3. this file (cascade order, no layer — applies to bare element selectors)
+ */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+ul[role='list'],
+ol[role='list'] {
+  list-style: none;
+  padding: 0;
+}
+
+/* Focus ring — visible, mustard-yellow, not a default browser blue. */
+:focus-visible {
+  outline: 3px solid var(--color-mustard-400, currentColor);
+  outline-offset: 2px;
+}
+
+/* Prose container — usable on any text-heavy section. */
+.prose {
+  max-width: 38rem;
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  line-height: var(--lh-loose);
+  color: var(--color-text);
+}
+
+.prose > * + * {
+  margin-top: var(--space-4);
+}
+
+.prose h2,
+.prose h3 {
+  font-family: var(--font-display);
+  margin-top: var(--space-8);
+  margin-bottom: var(--space-3);
+  line-height: var(--lh-snug);
+}
+
+.prose a {
+  color: var(--color-accent-alt);
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+}
+
+.prose a:hover {
+  color: var(--color-mustard-600);
+}

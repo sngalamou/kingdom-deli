@@ -1,0 +1,77 @@
+---
+// @ngc/ui/components/Header
+
+interface NavLink {
+  href: string;
+  label: string;
+}
+
+interface Props {
+  brand?: string;
+  links?: NavLink[];
+}
+
+const {
+  brand = 'NGC',
+  links = [
+    { href: '/menu', label: 'Menu' },
+    { href: '/order', label: 'Order' },
+    { href: '/find-us', label: 'Find us' },
+    { href: '/about', label: 'About' },
+    { href: '/contact', label: 'Contact' },
+  ],
+} = Astro.props;
+---
+
+<header class="site-header">
+  <a href="/" class="brand">{brand}</a>
+  <nav aria-label="Primary">
+    <ul>
+      {links.map((link) => (
+        <li><a href={link.href}>{link.label}</a></li>
+      ))}
+    </ul>
+  </nav>
+</header>
+
+<style>
+  .site-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--space-4) var(--space-6);
+    background: var(--color-bg);
+    border-bottom: var(--border-rule);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+  .brand {
+    font-family: var(--font-display);
+    font-size: var(--fs-h2);
+    color: var(--color-text);
+    text-decoration: none;
+    letter-spacing: var(--tracking-display);
+  }
+  nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: var(--space-6);
+  }
+  nav a {
+    font-family: var(--font-body);
+    color: var(--color-text);
+    text-decoration: none;
+    font-size: var(--fs-small);
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-uppercase);
+  }
+  nav a:hover { color: var(--color-accent); }
+  @media (max-width: 640px) {
+    .site-header { padding: var(--space-3) var(--space-4); flex-wrap: wrap; gap: var(--space-3); }
+    nav ul { gap: var(--space-3); flex-wrap: wrap; }
+    .brand { font-size: var(--fs-h3); }
+  }
+</style>

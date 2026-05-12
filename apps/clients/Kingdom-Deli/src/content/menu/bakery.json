@@ -1,0 +1,57 @@
+{
+  "category": {
+    "name": "From the Bakery",
+    "slug": "bakery",
+    "displayOrder": 6,
+    "description": "Whole and by the slice. Cakes for pickup with 48 hours notice."
+  },
+  "items": [
+    {
+      "id": "butter-cookie-single",
+      "name": "Chicago Lunchroom Butter Cookie",
+      "description": "Soft, cakey, pink-frosted. The one from the cafeteria tray. Sold singly or by the half-dozen.",
+      "price": 1.95,
+      "noPork": true,
+      "squareSku": "BKR-BC-01",
+      "available": true,
+      "featured": true
+    },
+    {
+      "id": "butter-cookie-half-dozen",
+      "name": "Butter Cookies — Half Dozen",
+      "description": "Six pink-frosted butter cookies, boxed.",
+      "price": 10.95,
+      "noPork": true,
+      "squareSku": "BKR-BC-06",
+      "available": true,
+      "featured": true
+    },
+    {
+      "id": "cheesecake-slice",
+      "name": "Cheesecake — Slice",
+      "description": "Classic New York style, plain or with seasonal topping.",
+      "price": 5.95,
+      "noPork": true,
+      "squareSku": "BKR-CC-SL",
+      "available": true
+    },
+    {
+      "id": "cheesecake-whole",
+      "name": "Cheesecake — Whole",
+      "description": "Whole 9-inch cheesecake. 48 hours notice for pickup.",
+      "price": 38.00,
+      "noPork": true,
+      "squareSku": "BKR-CC-WH",
+      "available": true
+    },
+    {
+      "id": "specialty-cake",
+      "name": "Specialty Cake — Custom",
+      "description": "Birthday, anniversary, just because. Call or stop in to discuss design and flavor. Starting at $45 for an 8-inch.",
+      "price": 45.00,
+      "noPork": true,
+      "squareSku": "BKR-CAKE-CUSTOM",
+      "available": true
+    }
+  ]
+}

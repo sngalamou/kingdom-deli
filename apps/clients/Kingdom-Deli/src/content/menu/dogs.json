@@ -1,0 +1,48 @@
+{
+  "category": {
+    "name": "Hot Dogs & Polish",
+    "slug": "dogs",
+    "displayOrder": 2,
+    "description": "Vienna Beef, dragged through the garden. The Chicago way."
+  },
+  "items": [
+    {
+      "id": "vienna-dog",
+      "name": "Chicago Dog",
+      "description": "Vienna Beef hot dog, poppy seed bun, yellow mustard, neon relish, chopped onion, tomato wedge, sport peppers, pickle spear, celery salt. No ketchup.",
+      "price": 5.95,
+      "noPork": true,
+      "squareSku": "DOG-CHI-01",
+      "available": true,
+      "featured": true
+    },
+    {
+      "id": "plain-dog",
+      "name": "Vienna Beef Dog",
+      "description": "Same Vienna Beef, your way. Mustard, onion, relish — pick your toppings.",
+      "price": 4.95,
+      "noPork": true,
+      "squareSku": "DOG-PLN-01",
+      "available": true
+    },
+    {
+      "id": "polish",
+      "name": "Polish Sausage",
+      "description": "All-beef Polish, grilled. Mustard, grilled onions, sport peppers if you want the heat.",
+      "price": 6.95,
+      "noPork": true,
+      "squareSku": "DOG-POL-01",
+      "available": true,
+      "featured": true
+    },
+    {
+      "id": "dog-meal",
+      "name": "Dog Combo",
+      "description": "Chicago Dog, fries, and a fountain soda.",
+      "price": 10.95,
+      "noPork": true,
+      "squareSku": "DOG-COMBO-01",
+      "available": true
+    }
+  ]
+}

@@ -1,0 +1,92 @@
+---
+// @ngc/ui/components/HoursBlock
+//
+// Renders a location's hours. Pass `hours` from Sanity (location.hours array)
+// when wired; defaults below are sensible for mall food-court tenants.
+
+interface DayHours {
+  day: 'mon' | 'tue' | 'wed' | 'thu' | 'fri' | 'sat' | 'sun';
+  open?: string;
+  close?: string;
+  closed?: boolean;
+}
+
+interface Props {
+  hours?: DayHours[];
+  title?: string;
+}
+
+const DEFAULT_HOURS: DayHours[] = [
+  { day: 'mon', open: '11:00', close: '19:00' },
+  { day: 'tue', open: '11:00', close: '19:00' },
+  { day: 'wed', open: '11:00', close: '19:00' },
+  { day: 'thu', open: '11:00', close: '19:00' },
+  { day: 'fri', open: '10:00', close: '20:00' },
+  { day: 'sat', open: '10:00', close: '20:00' },
+  { day: 'sun', open: '11:00', close: '18:00' },
+];
+
+const DAY_LABELS: Record<DayHours['day'], string> = {
+  mon: 'Monday',
+  tue: 'Tuesday',
+  wed: 'Wednesday',
+  thu: 'Thursday',
+  fri: 'Friday',
+  sat: 'Saturday',
+  sun: 'Sunday',
+};
+
+const { hours = DEFAULT_HOURS, title = 'Hours' } = Astro.props;
+
+function formatTime(t?: string): string {
+  if (!t) return '';
+  const [hStr, mStr] = t.split(':');
+  if (!hStr) return t;
+  const h = Number(hStr);
+  const m = Number(mStr ?? 0);
+  const period = h >= 12 ? 'pm' : 'am';
+  const hour12 = h === 0 ? 12 : h > 12 ? h - 12 : h;
+  const minutePart = m && m !== 0 ? `:${String(m).padStart(2, '0')}` : '';
+  return `${hour12}${minutePart}${period}`;
+}
+---
+
+<div class="hours-block">
+  <h3>{title}</h3>
+  <dl>
+    {hours.map((h) => (
+      <div class="hours-row">
+        <dt>{DAY_LABELS[h.day]}</dt>
+        <dd>
+          {h.closed ? 'Closed' : `${formatTime(h.open)}–${formatTime(h.close)}`}
+        </dd>
+      </div>
+    ))}
+  </dl>
+</div>
+
+<style>
+  .hours-block { font-family: var(--font-body); }
+  h3 {
+    font-family: var(--font-display);
+    font-size: var(--fs-h3);
+    margin: 0 0 var(--space-3);
+    letter-spacing: var(--tracking-display);
+  }
+  dl {
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: var(--space-1);
+  }
+  .hours-row {
+    display: grid;
+    grid-template-columns: 7rem 1fr;
+    gap: var(--space-4);
+    padding: var(--space-1) 0;
+    border-bottom: 1px dotted var(--color-rule);
+  }
+  .hours-row:last-child { border-bottom: 0; }
+  dt { color: var(--color-text); }
+  dd { margin: 0; color: var(--color-text-muted); }
+</style>

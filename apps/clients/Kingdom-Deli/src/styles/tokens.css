@@ -10,7 +10,8 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Vollkorn:ital,wght@0,400;0,600;0,700;1,400&display=swap');
 
-:root {
+@layer ngc-client {
+  :root {
   /* === COLOR === */
 
   /* Cream — page background, card surfaces */
@@ -98,25 +99,28 @@
 
   --border-rule: 1.5px solid var(--color-charcoal-900);
   --border-heavy: 2.5px solid var(--color-charcoal-900);
+  }
 }
 
 /* Base typography defaults — applied to <body> in BaseLayout. */
-body {
-  font-family: var(--font-body);
-  font-size: var(--fs-body);
-  line-height: var(--lh-base);
-  color: var(--color-text);
-  background: var(--color-bg);
-}
+@layer ngc-client {
+  body {
+    font-family: var(--font-body);
+    font-size: var(--fs-body);
+    line-height: var(--lh-base);
+    color: var(--color-text);
+    background: var(--color-bg);
+  }
 
-h1, h2, h3, h4 {
-  font-family: var(--font-display);
-  letter-spacing: var(--tracking-display);
-  line-height: var(--lh-tight);
-}
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    letter-spacing: var(--tracking-display);
+    line-height: var(--lh-tight);
+  }
 
-/* Small details that elevate the old-school feel without intruding on copy. */
-::selection {
-  background: var(--color-mustard-400);
-  color: var(--color-charcoal-900);
+  /* Small details that elevate the old-school feel without intruding on copy. */
+  ::selection {
+    background: var(--color-mustard-400);
+    color: var(--color-charcoal-900);
+  }
 }

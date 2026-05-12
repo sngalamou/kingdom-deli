@@ -1,0 +1,6 @@
+{
+  "buildCommand": "pnpm --filter=@ngc/kingdom-deli build",
+  "outputDirectory": "apps/clients/Kingdom-Deli/dist",
+  "installCommand": "pnpm install --frozen-lockfile",
+  "framework": "astro"
+}
