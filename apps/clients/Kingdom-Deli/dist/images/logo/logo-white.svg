@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400" width="800" height="400" role="img">
+<rect width="800" height="400" fill="#2B2422"/>
+
+<rect x="32" y="32" width="736" height="336"
+      fill="none" stroke="#F5E9D7" stroke-width="1.5" opacity="0.6"/>
+<rect x="38" y="38" width="724" height="324"
+      fill="none" stroke="#F5E9D7" stroke-width="0.5" opacity="0.4"/>
+
+<g>
+  <line x1="370.0" y1="82" x2="300.0" y2="82"
+        stroke="#C49A3D" stroke-width="1.5"/>
+  <line x1="430.0" y1="82" x2="500.0" y2="82"
+        stroke="#C49A3D" stroke-width="1.5"/>
+  <text x="400.0" y="86" text-anchor="middle"
+        font-family="Georgia, serif" font-size="14" font-weight="700"
+        letter-spacing="4" fill="#C49A3D">BRAND</text>
+</g>
+
+<text x="400.0" y="212.0" text-anchor="middle"
+      font-family="Georgia, 'Times New Roman', serif"
+      font-size="64" font-weight="900" fill="#F5E9D7" letter-spacing="2">KINGDOM DELI</text>
+<text x="400.0" y="250.0" text-anchor="middle"
+      font-family="Georgia, serif" font-size="14" font-style="italic"
+      fill="#F5E9D7" opacity="0.7" letter-spacing="2">INVERTED — DARK BG USE</text>
+
+<line x1="720" y1="340" x2="768" y2="340"
+      stroke="#C49A3D" stroke-width="1.5"/>
+<text x="768" y="364" text-anchor="end"
+      font-family="Georgia, serif" font-size="18" font-weight="800"
+      letter-spacing="2" fill="#C49A3D">KD</text>
+</svg>
