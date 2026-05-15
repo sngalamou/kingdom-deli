@@ -18,7 +18,6 @@ interface Props {
   description?: string;
   brand?: string;
   footerTagline?: string;
-  ogImage?: string; // 1. Add this to the interface
 }
 
 const { 
@@ -26,10 +25,8 @@ const {
   description = 'Kingdom Deli — Wholistic, good food. Old-school Chicago deli + bakery in the Louis Joliet Mall.',
   brand = '',
   footerTagline = '',
-  ogImage = '/images/logo/og-image.jpg', // 2. Add the default fallback from your public folder
 } = Astro.props;
 ---
-
 
 <!DOCTYPE html>
 <html lang="en">
