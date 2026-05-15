@@ -39,7 +39,7 @@ const formattedAddress = `${address.street}, ${address.city}, ${address.state} $
 
     <section class="find-hours">
       <h2>Hours</h2>
-      <HoursBlock hours={location.hours} />
+      <HoursBlock hours={location.hours as any} />
     </section>
 
     <section class="find-map">

@@ -1,0 +1,59 @@
+---
+// SideBadge — The Minimalist Tag.
+// Used on menuItem cards to subtly denote side items.
+
+interface Props {
+  /** Override default label. Defaults to 'SIDE'. */
+  label?: string;
+  /** Visual size. Default 'sm' for in-card placement. */
+  size?: 'sm' | 'md';
+}
+
+const { label = 'SIDE', size = 'sm' } = Astro.props;
+---
+
+<span
+  class={`side-badge side-badge--${size}`}
+  role="img"
+  aria-label={label}
+  title={label}
+>
+  <span class="side-badge__inner">{label}</span>
+</span>
+
+<style>
+  .side-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    text-transform: uppercase;
+    color: #36454F;
+    background: transparent;
+    border: 1px solid #36454F;
+    border-radius: 2px;
+    padding: 0.15em 0.4em 0.1em;
+    line-height: 1;
+    transition: transform 200ms ease;
+  }
+
+  .side-badge:hover {
+    transform: translateY(-2px);
+    /* Sharp drop shadow using Brand Charcoal */
+    box-shadow: 4px 4px 0 #36454F; 
+  }
+
+  .side-badge--sm {
+    font-size: 0.6875rem;
+  }
+
+  .side-badge--md {
+    font-size: 0.875rem;
+    padding: 0.25em 0.5em 0.2em;
+  }
+
+  .side-badge__inner {
+    display: inline-block;
+  }
+</style>

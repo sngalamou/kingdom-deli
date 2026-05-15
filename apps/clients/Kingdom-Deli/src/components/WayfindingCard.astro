@@ -37,7 +37,13 @@ const { heading = 'Fastest way in' } = Astro.props;
     color: var(--color-charcoal-900, #15110d);
     box-shadow: 6px 6px 0 var(--color-mustard-500, #d4a017);
   }
-
+  
+  .wayfinding-card:hover {
+    transform: translateY(-2px);
+    /* Sharp drop shadow using Brand Charcoal */
+    box-shadow: 4px 4px 0 #36454F; 
+  }
+  
   .wayfinding-card__rule {
     position: absolute;
     top: 0.4rem;

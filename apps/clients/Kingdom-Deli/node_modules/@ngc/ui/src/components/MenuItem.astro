@@ -16,6 +16,9 @@ interface MenuItemData {
   description?: string;
   price?: number;
   image?: MenuItemImage;
+  // Added these to support your variantClass logic
+  category?: string; 
+  Desert?: boolean; 
 }
 
 interface Props {
@@ -23,26 +26,40 @@ interface Props {
 }
 
 const { item } = Astro.props;
-const hasImage = Boolean(item.image?.url);
----
 
-<article class="menu-item">
+// 1. Determine if we have a valid image URL to render
+const hasImage = !!item.image?.url;
+
+// 2. Build the dynamic class string
+// Pro-tip: .toLowerCase() ensures your CSS classes are always safe (e.g., 'menu-item--deli')
+const variantClass = [
+  'menu-item',
+  item.category ? `menu-item--${item.category.toLowerCase()}` : null,
+  item.Desert ? 'menu-item--desert' : null,
+].filter(Boolean).join(' ');
+--- 
+
+<article class={variantClass}>
   <div class="menu-item-image">
     {hasImage ? (
-      <img src={item.image?.url} alt={item.image?.alt ?? item.name} loading="lazy" />
+      <img 
+        src={item.image?.url} 
+        alt={item.image?.alt ?? item.name} 
+        loading="lazy" 
+      />
     ) : (
       <div class="image-placeholder" aria-hidden="true" />
     )}
   </div>
+  
   <div class="menu-item-body">
     <header class="menu-item-header">
-      <h3>{item.name}</h3>
-      {item.price !== undefined && (
-        <span class="price">${item.price.toFixed(2)}</span>
-      )}
+      <h3 class="menu-item-name">{item.name}</h3>
+      {item.price && <span class="menu-item-price">${item.price.toFixed(2)}</span>}
     </header>
-    {item.description && <p class="description">{item.description}</p>}
-    <div class="menu-item-badge">
+    {item.description && <p class="menu-item-description">{item.description}</p>}
+    
+    <div class="flex gap-2 mt-3 items-center">
       <slot name="badge" />
     </div>
   </div>
@@ -50,58 +67,99 @@ const hasImage = Boolean(item.image?.url);
 
 <style>
   .menu-item {
-    display: grid;
-    gap: var(--space-3);
-    padding: var(--space-4);
-    background: var(--color-bg);
-    border: var(--border-rule);
-  }
-  .menu-item-image {
-    aspect-ratio: 4 / 3;
     background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 4px;
     overflow: hidden;
+    display: flex;
+    flex-direction: column;
   }
-  .menu-item-image img {
+
+  .menu-item-image {
     width: 100%;
-    height: 100%;
+    aspect-ratio: 1 / 1;
     object-fit: cover;
     display: block;
   }
-  .image-placeholder {
-    width: 100%;
-    height: 100%;
-    background: repeating-linear-gradient(
-      45deg,
-      var(--color-surface),
-      var(--color-surface) 8px,
-      var(--color-bg) 8px,
-      var(--color-bg) 16px
-    );
+
+  .menu-item-body {
+    padding: var(--space-4);
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
   }
+
   .menu-item-header {
     display: flex;
     justify-content: space-between;
     align-items: baseline;
     gap: var(--space-3);
   }
-  h3 {
-    font-family: var(--font-display);
+
+  .menu-item-name {
     font-size: var(--fs-h3);
     margin: 0;
     color: var(--color-text);
   }
-  .price {
-    font-family: var(--font-display);
-    color: var(--color-accent-alt);
-    font-size: var(--fs-h3);
+
+  .menu-item-price {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-weight: 700;
+    color: var(--color-accent);
     white-space: nowrap;
   }
-  .description {
-    font-family: var(--font-body);
-    color: var(--color-text-muted);
+
+  .menu-item-description {
     margin: 0;
     font-size: var(--fs-small);
-    line-height: var(--lh-base);
+    color: var(--color-text-muted);
+    font-style: italic;
   }
-  .menu-item-badge:empty { display: none; }
+
+  /* Per-category variants */
+
+  .menu-item--deli {
+    /* default styling — corned beef, pastrami, reuben, italian beef */
+  }
+
+  .menu-item--dogs {
+    /* dogs get a subtle mustard-yellow left border */
+    border-left: 4px solid var(--color-accent-alt);
+  }
+
+  .menu-item--plates {
+    /* plates get slightly more visual weight */
+    border: 1px solid var(--color-border);
+  }
+
+  .menu-item--sides .menu-item-name {
+    /* sides get smaller titles — they're supporting */
+    font-size: var(--fs-h4);
+  }
+
+  .menu-item--drinks {
+    /* drinks compress vertically — they're less detailed */
+  }
+
+  .menu-item--drinks .menu-item-image {
+    aspect-ratio: 4 / 3;
+  }
+
+  .menu-item--bakery {
+    /* bakery gets a warm cream-tone background */
+    background: var(--color-bg-alt, var(--color-surface));
+  }
+
+  /* Dessert flag adds an extra touch — only fires when isDessert: true */
+
+  .menu-item--dessert {
+    /* dessert items get a mustard accent border at the top */
+    border-top: 3px solid var(--color-accent-alt);
+  }
+
+  .menu-item--dessert .menu-item-name {
+    /* slightly fancier serif treatment for desserts */
+    font-style: italic;
+  }
 </style>

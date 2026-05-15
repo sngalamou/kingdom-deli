@@ -2,6 +2,12 @@
 // Menu — Kingdom Deli
 // Renders all menu items grouped by category, ordered by category.displayOrder.
 // NoPorkBadge appears only when item.noPork === true.
+// DessertBadge appears only when item.Dessert === true.
+// SideBadge appears only when item.Side === true.
+// PlateBadge appears only when item.Plate === true.
+// DeliBadge appears only when item.Deli === true.
+// DogsBadge appears only when item.Dogs === true.
+// DrinksBadge appears only when item.Drinks === true.
 //
 // Data source: local JSON files in src/content/menu/. When Sanity lands,
 // swap src/lib/menu.ts to query Sanity — this page doesn't change.
@@ -9,6 +15,12 @@ import BaseLayout from '@ngc/ui/layouts/BaseLayout.astro';
 import '../styles/tokens.css';
 import MenuItem from '@ngc/ui/components/MenuItem.astro';
 import NoPorkBadge from '../components/NoPorkBadge.astro';
+import DeliBadge from '../components/DeliBadge.astro';
+import DessertBadge from '../components/DessertBadge.astro';
+import DogsBadge from '../components/DogsBadge.astro';
+import DrinksBadge from '../components/DrinksBadge.astro';
+import PlateBadge from '../components/PlateBadge.astro';
+import SideBadge from '../components/SideBadge.astro';
 import { getMenu } from '../lib/menu';
 import site from '../content/site.json';
 
@@ -24,9 +36,38 @@ const categories = getMenu();
         line done right, jerk chicken from the islands, and a bakery counter built
         around the Chicago Lunchroom Butter Cookie.
       </p>
-      <p class="menu-legend">
+      <!-- <p class="menu-legend">
         <NoPorkBadge size="sm" /> <span>{site.noPorkExplainer}</span>
-      </p>
+        <DessertBadge size="sm" /> <span>{site.DessertExplainer}</span>
+        <SideBadge size="sm" /> <span>{site.SideExplainer}</span>
+        <PlateBadge size="sm" /> <span>{site.PlateExplainer}</span>
+        <DeliBadge size="sm" /> <span>{site.DeliExplainer}</span>
+        <DogsBadge size="sm" /> <span>{site.DogsExplainer}</span>
+        <DrinksBadge size="sm" /> <span>{site.DrinksExplainer}</span>
+      </p> -->
+      <div class="menu-legend">
+        <div class="legend-item">
+          <NoPorkBadge size="sm" /> <span>{site.noPorkExplainer}</span>
+        </div>
+        <div class="legend-item">
+          <DessertBadge size="sm" /> <span>{site.DessertExplainer}</span>
+        </div>
+        <div class="legend-item">
+          <SideBadge size="sm" /> <span>{site.SideExplainer}</span>
+        </div>
+        <div class="legend-item">
+          <PlateBadge size="sm" /> <span>{site.PlateExplainer}</span>
+        </div>
+        <div class="legend-item">
+          <DeliBadge size="sm" /> <span>{site.DeliExplainer}</span>
+        </div>
+        <div class="legend-item">
+          <DogsBadge size="sm" /> <span>{site.DogsExplainer}</span>
+        </div>
+        <div class="legend-item">
+          <DrinksBadge size="sm" /> <span>{site.DrinksExplainer}</span>
+        </div>
+      </div>
     </header>
 
     {categories.map((cat) => (
@@ -39,11 +80,22 @@ const categories = getMenu();
           {cat.items.map((item) => (
             <MenuItem item={{ name: item.name, description: item.description, price: item.price }}>
               {item.noPork && <NoPorkBadge slot="badge" />}
+              {item.isDeli && <DessertBadge slot="badge" />}
+              {item.isDessert && <SideBadge slot="badge" />}
+              {item.isDogs && <PlateBadge slot="badge" />}
+              {item.isDrinks && <DeliBadge slot="badge" />}
+              {item.isPlate && <DogsBadge slot="badge" />}
+              {item.isSide && <DrinksBadge slot="badge" />}
             </MenuItem>
           ))}
         </div>
       </section>
     ))}
+
+
+
+
+
 
     <footer class="menu-footer">
       <p>
@@ -71,7 +123,24 @@ const categories = getMenu();
     color: var(--color-text);
     margin: 0 0 var(--space-6);
   }
+  /* The parent container stacks the rows */
   .menu-legend {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem; /* Space BETWEEN each row */
+    background: var(--color-bg-alt, var(--color-surface));
+    border: 3px solid var(--color-accent-alt);
+    padding: var(--space-3) var(--space-4);
+  }
+
+  /* The individual row aligns the badge and the text */
+  .legend-item {
+    display: flex;
+    align-items: flex-start; /* Keeps the badge at the top if the text wraps to two lines */
+    gap: 0.75rem; /* Space between the badge and the explanation text */
+    line-height: 1.5;
+  }
+  /* .menu-legend {
     display: flex;
     align-items: center;
     gap: var(--space-3);
@@ -81,7 +150,7 @@ const categories = getMenu();
     padding: var(--space-3) var(--space-4);
     background: var(--color-bg-alt, var(--color-surface));
     border-left: 3px solid var(--color-accent-alt);
-  }
+  } */
   .menu-category { margin: var(--space-16) 0; }
   .category-header {
     border-bottom: var(--border-heavy);

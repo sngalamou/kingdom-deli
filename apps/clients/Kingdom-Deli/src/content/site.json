@@ -29,5 +29,11 @@
     "orderSecondary": "See the menu",
     "twoWaysIn": "Two ways in. Order ahead for pickup, or come find us at the counter."
   },
-  "noPorkExplainer": "A small stamp marks items on our all-beef line — Vienna Beef hot dogs and Polish, our corned beef and pastrami. Item by item, not a slogan."
+  "noPorkExplainer": "A small stamp marks items on our all-beef line — Vienna Beef hot dogs and Polish, our corned beef and pastrami. Item by item, not a slogan.",
+  "DessertExplainer": "From the bakery case to the box. Classic Chicago butter cookies, rich cheesecakes, and fresh-baked sweets to finish the job.",
+  "SideExplainer": "The necessary hardware for a proper meal. Golden fries, house-made slaw, and a crisp dill pickle spear on the side.",
+  "PlateExplainer": "Heavy-hitting dinners when a sandwich won't cut it. Sizzling jerk chicken and street tacos that demand a fork and a sit-down.",
+  "DeliExplainer": "The foundation of the house. Slow-cured corned beef and hot pastrami, stacked high on fresh marble rye. No shortcuts.",
+  "DogsExplainer": "Authentic Vienna Beef, dragged through the garden. Classic Chicago dogs and grilled Maxwell Street Polish loaded with sweet onions.",
+  "DrinksExplainer": "Ice-cold sodas and refreshing pours to wash it all down. The perfect pairing for a heavy plate or a stacked sandwich."
 }

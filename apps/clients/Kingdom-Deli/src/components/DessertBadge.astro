@@ -1,0 +1,73 @@
+---
+// DessertBadge — Bakery Box Label aesthetic for Kingdom Deli.
+// Used on menuItem cards where the item is a dessert.
+
+interface Props {
+  /** Override default label (e.g., for a menu legend).
+  Defaults to the category name. */
+  label?: string;
+  /** Visual size. Default 'sm' for in-card placement.
+  */
+  size?: 'sm' | 'md';
+}
+
+const { label = 'Dessert', size = 'sm' } = Astro.props;
+---
+
+<span
+  class={`dessert-badge dessert-badge--${size}`}
+  role="img"
+  aria-label={label}
+  title={label}
+>
+  <span class="dessert-badge__inner">{label}</span>
+</span>
+
+<style>
+  /* Bakery Box Label aesthetic: Navy text and border on Cream background, 
+   * subtle linear-gradient pattern, and an 8px border-radius to mimic a sticker. 
+   */
+  .dessert-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Manrope', sans-serif;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #000080; /* Navy */
+    background: #fdfaf3; /* Cream */
+    background-image: repeating-linear-gradient(
+      -45deg,
+      rgba(0, 0, 128, 0.02) 0px,
+      rgba(0, 0, 128, 0.02) 4px,
+      transparent 4px,
+      transparent 8px
+    );
+    border: 1.5px solid #000080; /* Navy */
+    border-radius: 8px;
+    padding: 0.25em 0.55em 0.2em;
+    box-shadow: 0 1px 0 rgba(0, 0, 128, 0.05);
+    line-height: 1;
+    transition: transform 200ms ease, box-shadow 200ms ease;
+  }
+
+  .dessert-badge:hover {
+    transform: translateY(-2px);
+    /* Sharp drop shadow using Brand Charcoal */
+    box-shadow: 4px 4px 0 #36454F; 
+  }
+
+  .dessert-badge--sm {
+    font-size: 0.6875rem; /* ~11px */
+  }
+
+  .dessert-badge--md {
+    font-size: 0.875rem;
+    padding: 0.35em 0.75em 0.3em;
+  }
+
+  .dessert-badge__inner {
+    display: inline-block;
+  }
+</style>

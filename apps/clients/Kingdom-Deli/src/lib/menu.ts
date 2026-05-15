@@ -19,6 +19,12 @@ export interface MenuItem {
   description?: string;
   price: number;
   noPork: boolean;
+  isDeli: boolean;
+  isDessert: boolean;
+  isDogs: boolean;
+  isDrinks: boolean;
+  isPlate: boolean;
+  isSide: boolean;
   squareSku?: string;
   available: boolean;
   featured?: boolean;

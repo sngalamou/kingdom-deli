@@ -31,6 +31,19 @@ const pageTitle = `${site.brand} — ${site.tagline} ${location.parentVenue}.`;
     <p slot="subhead">{site.subTagline}</p>
     <a slot="cta-primary" href="/order">{site.ctaCopy.orderPrimary}</a>
     <a slot="cta-secondary" href="/menu">{site.ctaCopy.orderSecondary}</a>
+	<section class="hero">
+	  <img
+		src="/images/hero/home-hero.jpg"
+		alt="Pastrami sandwich on rye, hand-cut and stacked high"
+		width="2400"
+		height="1600"
+		class="hero-image"
+	  />
+	  <div class="hero-overlay">
+		<h1>{site.tagline}</h1>
+		<!-- ... -->
+	  </div>
+	</section>
   </Hero>
 
   {featured.length > 0 && (
@@ -176,5 +189,10 @@ const pageTitle = `${site.brand} — ${site.tagline} ${location.parentVenue}.`;
   .cta-secondary:hover {
     background: var(--color-text);
     color: var(--color-bg);
+  }
+  .hero-image {
+    width: 100%;
+    height: 60vh;
+    object-fit: cover;
   }
 </style>
