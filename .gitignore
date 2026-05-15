@@ -1,4 +1,4 @@
-
-# macOS metadata
+node_modules/
+**/node_modules/
+.turbo/
 .DS_Store
-**/.DS_Store
