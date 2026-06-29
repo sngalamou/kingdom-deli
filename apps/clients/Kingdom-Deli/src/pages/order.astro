@@ -1,6 +1,13 @@
 ---
 import BaseLayout from '@ngc/ui/layouts/BaseLayout.astro';
 import site from '../content/site.json';
+
+// Paste from /api/catalog output. This is the orderable list; price is NOT here (Square owns it).
+const orderable = [
+  { label: 'Pastrami', variationId: 'PASTE_VARIATION_ID' },
+  { label: 'Corn Beef', variationId: 'PASTE_VARIATION_ID' },
+  // …
+];
 ---
 <BaseLayout title="Order pickup — Kingdom Deli" brand={site.brand} footerTagline={site.footerTagline}>
   <header class="order-header">
@@ -8,25 +15,66 @@ import site from '../content/site.json';
     <p>We're in the Louis Joliet Mall food court — come in through Cinemark.</p>
   </header>
 
-  <div id="cart-root"><!-- your menu/cart UI renders here --></div>
-  <button id="checkout">Checkout</button>
-  <p id="err" hidden></p>
+  <ul class="cart" id="cart">
+    {orderable.map((it) => (
+      <li class="cart-row">
+        <span class="cart-name">{it.label}</span>
+        <span class="cart-controls">
+          <button type="button" class="qty-dec" data-id={it.variationId} aria-label={`Remove one ${it.label}`}>–</button>
+          <output class="qty" data-id={it.variationId}>0</output>
+          <button type="button" class="qty-inc" data-id={it.variationId} aria-label={`Add one ${it.label}`}>+</button>
+        </span>
+      </li>
+    ))}
+  </ul>
+
+  <button id="checkout" class="cta-primary" disabled>Checkout</button>
+  <p id="err" class="order-error" hidden></p>
+
+  <section class="order-footer">
+    <h2>How pickup works</h2>
+    <p>Pay online, then come to the counter — we'll have your order ready.</p>
+  </section>
 
   <script>
-    document.getElementById('checkout').addEventListener('click', async () => {
-      // Build this array from the customer's selections (see note below)
-      const lineItems = window.__cart ?? [];
-      const r = await fetch('/api/checkout', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ lineItems }),
-      });
-      const data = await r.json();
-      if (r.ok && data.url) {
-        window.location.href = data.url;          // hand off to Square's hosted checkout
-      } else {
-        const e = document.getElementById('err');
-        e.hidden = false; e.textContent = 'Could not start checkout. Try again.';
+    const qty = new Map();
+    const checkoutBtn = document.getElementById('checkout');
+    const errEl = document.getElementById('err');
+
+    const refresh = () => {
+      const total = [...qty.values()].reduce((a, b) => a + b, 0);
+      checkoutBtn.disabled = total === 0;
+    };
+    const setQty = (id, n) => {
+      const v = Math.max(0, n);
+      v === 0 ? qty.delete(id) : qty.set(id, v);
+      document.querySelector(`.qty[data-id="${id}"]`).textContent = String(v);
+      refresh();
+    };
+
+    document.getElementById('cart').addEventListener('click', (e) => {
+      const btn = e.target.closest('button'); if (!btn) return;
+      const id = btn.dataset.id;
+      if (btn.classList.contains('qty-inc')) setQty(id, (qty.get(id) || 0) + 1);
+      if (btn.classList.contains('qty-dec')) setQty(id, (qty.get(id) || 0) - 1);
+    });
+
+    checkoutBtn.addEventListener('click', async () => {
+      errEl.hidden = true;
+      checkoutBtn.disabled = true; checkoutBtn.textContent = 'Starting…';
+      const lineItems = [...qty.entries()].map(([variationId, quantity]) => ({ variationId, quantity }));
+      try {
+        const r = await fetch('/api/checkout', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ lineItems }),
+        });
+        const data = await r.json();
+        if (r.ok && data.url) { window.location.href = data.url; return; }
+        throw new Error();
+      } catch {
+        errEl.hidden = false; errEl.textContent = 'Could not start checkout. Please try again.';
+        checkoutBtn.disabled = false; checkoutBtn.textContent = 'Checkout';
       }
     });
   </script>
