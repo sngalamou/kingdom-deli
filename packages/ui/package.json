@@ -15,6 +15,7 @@
     "astro": "^4.0.0"
   },
   "dependencies": {
-    "@ngc/config": "workspace:*"
+    "@ngc/config": "workspace:*",
+    "@vercel/analytics": "^2.0.1"
   }
 }
