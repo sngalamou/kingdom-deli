@@ -1,25 +1,33 @@
 ---
-// Order — Kingdom Deli pickup ordering via Square Online.
 import BaseLayout from '@ngc/ui/layouts/BaseLayout.astro';
-import { SquareOrderEmbed } from '@ngc/square';
 import site from '../content/site.json';
 ---
-
-<BaseLayout title="Order pickup — Kingdom Deli"  brand={site.brand} footerTagline={site.footerTagline}>
+<BaseLayout title="Order pickup — Kingdom Deli" brand={site.brand} footerTagline={site.footerTagline}>
   <header class="order-header">
     <h1>Order for pickup</h1>
-    <p>
-      {/* TODO: Brief copy — "We're in the Louis Joliet Mall food court. Come in through Cinemark." */}
-    </p>
+    <p>We're in the Louis Joliet Mall food court — come in through Cinemark.</p>
   </header>
 
-  <SquareOrderEmbed
-    locationId={import.meta.env.PUBLIC_SQUARE_LOCATION_ID}
-    mode="pickup"
-  />
+  <div id="cart-root"><!-- your menu/cart UI renders here --></div>
+  <button id="checkout">Checkout</button>
+  <p id="err" hidden></p>
 
-  <section class="order-footer">
-    {/* TODO: Below-fold content — hours, what to expect, how pickup works at the food court counter. */}
-  </section>
-  
+  <script>
+    document.getElementById('checkout').addEventListener('click', async () => {
+      // Build this array from the customer's selections (see note below)
+      const lineItems = window.__cart ?? [];
+      const r = await fetch('/api/checkout', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ lineItems }),
+      });
+      const data = await r.json();
+      if (r.ok && data.url) {
+        window.location.href = data.url;          // hand off to Square's hosted checkout
+      } else {
+        const e = document.getElementById('err');
+        e.hidden = false; e.textContent = 'Could not start checkout. Try again.';
+      }
+    });
+  </script>
 </BaseLayout>

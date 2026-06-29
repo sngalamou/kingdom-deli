@@ -84,7 +84,7 @@ const pageTitle = `${site.brand} — ${site.tagline} ${location.parentVenue}.`;
     <h2>Two ways in.</h2>
     <p>Order ahead for pickup, or come find us at the counter.</p>
     <div class="cta-pair">
-      <a href="/order" class="cta-primary">{site.ctaCopy.orderPrimary}</a>
+      <a slot="cta-primary" href={site.orderUrl} target="_blank" rel="noopener noreferrer">{site.ctaCopy.orderPrimary}</a>
       <a href="/find-us" class="cta-secondary">Find us</a>
     </div>
   </section>
