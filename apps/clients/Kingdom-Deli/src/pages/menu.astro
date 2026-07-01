@@ -1,19 +1,18 @@
 ---
 // Menu — Kingdom Deli
 // Renders all menu items grouped by category, ordered by category.displayOrder.
-// NoPorkBadge appears only when item.noPork === true.
-// DessertBadge appears only when item.Dessert === true.
-// SideBadge appears only when item.Side === true.
-// PlateBadge appears only when item.Plate === true.
-// DeliBadge appears only when item.Deli === true.
-// DogsBadge appears only when item.Dogs === true.
-// DrinksBadge appears only when item.Drinks === true.
+//
+// Badges are derived from each item's `category` slug via CategoryBadge:
+//   deli→DeliBadge, dogs→DogsBadge (+ No-Pork stamp), plates→PlateBadge,
+//   sides→SideBadge, drinks→DrinksBadge, bakery→DessertBadge.
 //
 // Data source: local JSON files in src/content/menu/. When Sanity lands,
 // swap src/lib/menu.ts to query Sanity — this page doesn't change.
 import BaseLayout from '@ngc/ui/layouts/BaseLayout.astro';
 import '../styles/tokens.css';
+import '../styles/globals.css';
 import MenuItem from '@ngc/ui/components/MenuItem.astro';
+import CategoryBadge from '../components/CategoryBadge.astro';
 import NoPorkBadge from '../components/NoPorkBadge.astro';
 import DeliBadge from '../components/DeliBadge.astro';
 import DessertBadge from '../components/DessertBadge.astro';
@@ -23,6 +22,7 @@ import PlateBadge from '../components/PlateBadge.astro';
 import SideBadge from '../components/SideBadge.astro';
 import { getMenu } from '../lib/menu';
 import site from '../content/site.json';
+import { resolveVariationId } from '../lib/orderable';
 
 const categories = getMenu();
 ---
@@ -36,28 +36,7 @@ const categories = getMenu();
         line done right, jerk chicken from the islands, and a bakery counter built
         around the Chicago Lunchroom Butter Cookie.
       </p>
-      <!-- <p class="menu-legend">
-        <NoPorkBadge size="sm" /> <span>{site.noPorkExplainer}</span>
-        <DessertBadge size="sm" /> <span>{site.DessertExplainer}</span>
-        <SideBadge size="sm" /> <span>{site.SideExplainer}</span>
-        <PlateBadge size="sm" /> <span>{site.PlateExplainer}</span>
-        <DeliBadge size="sm" /> <span>{site.DeliExplainer}</span>
-        <DogsBadge size="sm" /> <span>{site.DogsExplainer}</span>
-        <DrinksBadge size="sm" /> <span>{site.DrinksExplainer}</span>
-      </p> -->
       <div class="menu-legend">
-        <div class="legend-item">
-          <NoPorkBadge size="sm" /> <span>{site.noPorkExplainer}</span>
-        </div>
-        <div class="legend-item">
-          <DessertBadge size="sm" /> <span>{site.DessertExplainer}</span>
-        </div>
-        <div class="legend-item">
-          <SideBadge size="sm" /> <span>{site.SideExplainer}</span>
-        </div>
-        <div class="legend-item">
-          <PlateBadge size="sm" /> <span>{site.PlateExplainer}</span>
-        </div>
         <div class="legend-item">
           <DeliBadge size="sm" /> <span>{site.DeliExplainer}</span>
         </div>
@@ -65,7 +44,19 @@ const categories = getMenu();
           <DogsBadge size="sm" /> <span>{site.DogsExplainer}</span>
         </div>
         <div class="legend-item">
+          <PlateBadge size="sm" /> <span>{site.PlateExplainer}</span>
+        </div>
+        <div class="legend-item">
+          <SideBadge size="sm" /> <span>{site.SideExplainer}</span>
+        </div>
+        <div class="legend-item">
           <DrinksBadge size="sm" /> <span>{site.DrinksExplainer}</span>
+        </div>
+        <div class="legend-item">
+          <DessertBadge size="sm" /> <span>{site.DessertExplainer}</span>
+        </div>
+        <div class="legend-item">
+          <NoPorkBadge size="sm" /> <span>{site.noPorkExplainer}</span>
         </div>
       </div>
     </header>
@@ -78,24 +69,13 @@ const categories = getMenu();
         </header>
         <div class="menu-grid">
           {cat.items.map((item) => (
-            <MenuItem item={{ name: item.name, description: item.description, price: item.price }}>
-              {item.noPork && <NoPorkBadge slot="badge" />}
-              {item.isDeli && <DessertBadge slot="badge" />}
-              {item.isDessert && <SideBadge slot="badge" />}
-              {item.isDogs && <PlateBadge slot="badge" />}
-              {item.isDrinks && <DeliBadge slot="badge" />}
-              {item.isPlate && <DogsBadge slot="badge" />}
-              {item.isSide && <DrinksBadge slot="badge" />}
+            <MenuItem item={{ name: item.name, description: item.description, price: item.price, category: item.category, variationId: resolveVariationId(item.name) }}>
+              <CategoryBadge slot="badge" category={item.category} />
             </MenuItem>
           ))}
         </div>
       </section>
     ))}
-
-
-
-
-
 
     <footer class="menu-footer">
       <p>
@@ -140,17 +120,6 @@ const categories = getMenu();
     gap: 0.75rem; /* Space between the badge and the explanation text */
     line-height: 1.5;
   }
-  /* .menu-legend {
-    display: flex;
-    align-items: center;
-    gap: var(--space-3);
-    font-size: var(--fs-small);
-    color: var(--color-text-muted);
-    margin: 0;
-    padding: var(--space-3) var(--space-4);
-    background: var(--color-bg-alt, var(--color-surface));
-    border-left: 3px solid var(--color-accent-alt);
-  } */
   .menu-category { margin: var(--space-16) 0; }
   .category-header {
     border-bottom: var(--border-heavy);
@@ -182,3 +151,7 @@ const categories = getMenu();
     font-style: italic;
   }
 </style>
+<script>
+  import { initAddButtons } from '../lib/cart';
+  initAddButtons();
+</script>

@@ -1,0 +1,240 @@
+---
+// /order — review the cart built while browsing, then hand off to Square checkout.
+// Two-column layout (cart list + summary card). The cart lines are built in the
+// <script>, so their styles use the `.cart-lines :global(...)` pattern (Astro
+// scoped styles otherwise miss runtime-created elements). The ‹ N › stepper reuses
+// the shared .ac-* classes from globals.css — but WITHOUT the 🛒 shortcut, since
+// we're already on the order page.
+import BaseLayout from '@ngc/ui/layouts/BaseLayout.astro';
+import site from '../content/site.json';
+---
+<BaseLayout title="Order pickup — Kingdom Deli" brand={site.brand} footerTagline={site.footerTagline}>
+  <a href="/menu" class="back-link">&larr; Back to menu</a>
+
+  <header class="order-header">
+    <h1>Your order</h1>
+    <p>We're in the Louis Joliet Mall food court — come in through Cinemark.</p>
+  </header>
+
+  <div class="order-grid">
+    <!-- LEFT: the cart -->
+    <section class="order-cart card">
+      <header class="cart-head">
+        <span class="cart-head__title">My cart</span>
+        <a href="/menu" class="cart-head__add">+ Add more</a>
+      </header>
+
+      <ul id="cart-lines" class="cart-lines"></ul>
+
+      <p id="cart-empty" class="cart-empty" hidden>
+        Your order is empty. <a href="/menu">Browse the menu</a> to add items.
+      </p>
+    </section>
+
+    <!-- RIGHT: the summary -->
+    <aside class="order-summary card">
+      <h2>Total</h2>
+      <dl class="summary-rows">
+        <div>
+          <dt>Items</dt>
+          <dd id="sum-count">0</dd>
+        </div>
+        <div class="summary-total">
+          <dt>Total</dt>
+          <dd>at&nbsp;checkout</dd>
+        </div>
+      </dl>
+
+      <button id="checkout" class="checkout-btn" disabled>Checkout</button>
+      <p id="order-err" class="order-error" hidden></p>
+
+      <p class="summary-note">
+        Prices are confirmed securely on the next step. Pay online, then pick up at the counter.
+      </p>
+    </aside>
+  </div>
+
+  <script>
+    import { getCart, setQty, cartCount } from '../lib/cart';
+
+    const linesEl = document.getElementById('cart-lines');
+    const emptyEl = document.getElementById('cart-empty');
+    const countEl = document.getElementById('sum-count');
+    const btn = document.getElementById('checkout');
+    const errEl = document.getElementById('order-err');
+
+    const render = () => {
+      const cart = getCart();
+      linesEl.innerHTML = '';
+      for (const line of cart) {
+        const li = document.createElement('li');
+        li.className = 'cart-line';
+        // Same ‹ N › control as the menu (.ac-* from globals.css) — no 🛒 here.
+        li.innerHTML = `
+          <span class="line-tile" aria-hidden="true"></span>
+          <div class="line-body">
+            <span class="line-name"></span>
+            <button type="button" class="line-remove">Remove</button>
+          </div>
+          <div class="add-control is-in-cart">
+            <div class="ac-stepper">
+              <button type="button" class="ac-btn ac-dec" aria-label="Remove one">\u2039</button>
+              <span class="ac-count">${line.quantity}</span>
+              <button type="button" class="ac-btn ac-inc" aria-label="Add one">\u203A</button>
+            </div>
+          </div>`;
+        li.querySelector('.line-tile').textContent = (line.label.trim()[0] || '\u2022').toUpperCase();
+        li.querySelector('.line-name').textContent = line.label;
+        li.querySelector('.ac-dec').addEventListener('click', () => setQty(line.variationId, line.quantity - 1));
+        li.querySelector('.ac-inc').addEventListener('click', () => setQty(line.variationId, line.quantity + 1));
+        li.querySelector('.line-remove').addEventListener('click', () => setQty(line.variationId, 0));
+        linesEl.appendChild(li);
+      }
+      const empty = cart.length === 0;
+      emptyEl.hidden = !empty;
+      countEl.textContent = String(cartCount());
+      btn.disabled = empty;
+    };
+
+    btn.addEventListener('click', async () => {
+      errEl.hidden = true;
+      btn.disabled = true; btn.textContent = 'Starting…';
+      const lineItems = getCart().map(({ variationId, quantity }) => ({ variationId, quantity }));
+      try {
+        const r = await fetch('/api/checkout', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ lineItems }),
+        });
+        const data = await r.json();
+        if (r.ok && data.url) { window.location.href = data.url; return; } // cart cleared on /thanks
+        console.error('checkout failed:', data);                            // detail for you
+        throw new Error();
+      } catch {
+        errEl.hidden = false;
+        errEl.textContent = 'Could not start checkout. Please try again.';
+        btn.disabled = false; btn.textContent = 'Checkout';
+      }
+    });
+
+    window.addEventListener('cart-updated', render);
+    window.addEventListener('storage', render);
+    render();
+  </script>
+
+  <style>
+    .back-link {
+      display: inline-block;
+      margin-bottom: var(--space-4);
+      color: var(--color-accent);
+      text-decoration: none;
+      font-family: var(--font-body);
+    }
+    .back-link:hover { color: var(--color-mustard-400); }
+
+    .order-header { margin-bottom: var(--space-8); }
+    .order-header h1 { font-size: var(--fs-display-2); margin: 0 0 var(--space-2); }
+    .order-header p { color: var(--color-text-muted); margin: 0; }
+
+    .order-grid {
+      display: grid;
+      grid-template-columns: 1fr 21rem;
+      gap: var(--space-8);
+      align-items: start;
+    }
+    @media (max-width: 860px) {
+      .order-grid { grid-template-columns: 1fr; }
+    }
+
+    .card {
+      background: var(--color-surface);
+      border: 1px solid var(--color-charcoal-700);
+      border-radius: var(--radius-md);
+    }
+
+    /* ---- cart (left) ---- */
+    .order-cart { padding: var(--space-6); }
+    .cart-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-bottom: var(--space-4);
+      border-bottom: 1px solid var(--color-charcoal-700);
+    }
+    .cart-head__title { font-family: var(--font-display); font-size: var(--fs-h3); }
+    .cart-head__add { color: var(--color-accent); text-decoration: none; font-size: var(--fs-small); }
+    .cart-head__add:hover { color: var(--color-mustard-400); }
+
+    .cart-lines { list-style: none; margin: 0; padding: 0; }
+
+    /* These rows are created at runtime by the <script>, so they don't carry the
+     * component's scope attribute — :global() lets the scoped parent reach them. */
+    .cart-lines :global(.cart-line) {
+      display: flex;
+      align-items: center;
+      gap: var(--space-4);
+      padding: var(--space-4) 0;
+      border-bottom: 1px solid var(--color-charcoal-700);
+    }
+    .cart-lines :global(.cart-line:last-child) { border-bottom: none; }
+
+    .cart-lines :global(.line-tile) {
+      flex: 0 0 auto;
+      width: 3rem; height: 3rem;
+      border-radius: var(--radius-sm);
+      background: var(--color-bg);
+      border: 1px solid var(--color-charcoal-700);
+      display: grid; place-items: center;
+      font-family: var(--font-display);
+      color: var(--color-accent);
+      font-size: 1.15rem;
+    }
+    .cart-lines :global(.line-body) { flex: 1 1 auto; min-width: 0; }
+    .cart-lines :global(.line-name) { display: block; font-weight: 600; color: var(--color-text); }
+    .cart-lines :global(.line-remove) {
+      margin-top: 2px;
+      background: none; border: none; padding: 0;
+      color: var(--color-text-muted);
+      font-size: var(--fs-small);
+      cursor: pointer; text-decoration: underline;
+    }
+    .cart-lines :global(.line-remove:hover) { color: var(--color-accent-alt); }
+
+    .cart-empty { color: var(--color-text-muted); padding: var(--space-8) 0; text-align: center; }
+    .cart-empty a { color: var(--color-accent); }
+
+    /* ---- summary (right) ---- */
+    .order-summary { padding: var(--space-6); position: sticky; top: var(--space-6); }
+    .order-summary h2 { font-size: var(--fs-h2); margin: 0 0 var(--space-4); }
+    .summary-rows { margin: 0 0 var(--space-6); }
+    .summary-rows > div { display: flex; justify-content: space-between; align-items: baseline; padding: var(--space-2) 0; }
+    .summary-rows dt { color: var(--color-text-muted); }
+    .summary-rows dd { margin: 0; font-weight: 600; color: var(--color-text); }
+    .summary-total {
+      border-top: 1px solid var(--color-charcoal-700);
+      margin-top: var(--space-2);
+      padding-top: var(--space-3) !important;
+    }
+    .summary-total dt, .summary-total dd { font-family: var(--font-display); }
+
+    .checkout-btn {
+      width: 100%;
+      padding: var(--space-3) var(--space-4);
+      background: var(--color-accent);
+      color: var(--color-charcoal-900);
+      border: none;
+      border-radius: var(--radius-sm);
+      font-family: var(--font-display);
+      text-transform: uppercase;
+      letter-spacing: var(--tracking-uppercase);
+      font-size: var(--fs-body);
+      cursor: pointer;
+      transition: transform 120ms ease, filter 120ms ease;
+    }
+    .checkout-btn:hover:not(:disabled) { transform: translateY(-1px); filter: brightness(1.04); }
+    .checkout-btn:disabled { opacity: 0.45; cursor: not-allowed; }
+
+    .summary-note { margin: var(--space-4) 0 0; font-size: var(--fs-small); color: var(--color-text-muted); line-height: var(--lh-base); }
+    .order-error { margin: var(--space-3) 0 0; color: var(--color-accent-alt); font-size: var(--fs-small); }
+  </style>
+</BaseLayout>

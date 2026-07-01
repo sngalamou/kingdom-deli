@@ -1,59 +1,42 @@
 ---
-// SideBadge — The Minimalist Tag.
-// Used on menuItem cards to subtly denote side items.
-
+// SideBadge — minimalist bronze tag. Gold family, but the quiet, earthy member:
+// a thin bronze outline, no fill, no rotation.
 interface Props {
   /** Override default label. Defaults to 'SIDE'. */
   label?: string;
   /** Visual size. Default 'sm' for in-card placement. */
   size?: 'sm' | 'md';
 }
-
 const { label = 'SIDE', size = 'sm' } = Astro.props;
 ---
 
-<span
-  class={`side-badge side-badge--${size}`}
-  role="img"
-  aria-label={label}
-  title={label}
->
+<span class={`side-badge side-badge--${size}`} role="img" aria-label={label} title={label}>
   <span class="side-badge__inner">{label}</span>
 </span>
 
 <style>
+  /* Minimalist bronze tag — the understated supporting-cast marker. */
   .side-badge {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    font-family: 'Inter', sans-serif;
-    font-weight: 500;
+    font-family: var(--font-display, Georgia, 'Times New Roman', serif);
+    font-weight: 700;
     text-transform: uppercase;
-    color: #36454F;
-    background: transparent;
-    border: 1px solid #36454F;
+    letter-spacing: 0.05em;
+    color: var(--color-mustard-600, #b07c08);
+    background: var(--color-cream-100, #f7f1de);
+    border: 1px solid var(--color-mustard-600, #b07c08);
     border-radius: 2px;
     padding: 0.15em 0.4em 0.1em;
     line-height: 1;
-    transition: transform 200ms ease;
+    transition: transform 200ms ease, box-shadow 200ms ease;
   }
-
   .side-badge:hover {
     transform: translateY(-2px);
-    /* Sharp drop shadow using Brand Charcoal */
-    box-shadow: 4px 4px 0 #36454F; 
+    box-shadow: 3px 3px 0 var(--color-mustard-600, #b07c08);
   }
-
-  .side-badge--sm {
-    font-size: 0.6875rem;
-  }
-
-  .side-badge--md {
-    font-size: 0.875rem;
-    padding: 0.25em 0.5em 0.2em;
-  }
-
-  .side-badge__inner {
-    display: inline-block;
-  }
+  .side-badge--sm { font-size: 0.6875rem; }
+  .side-badge--md { font-size: 0.875rem; padding: 0.25em 0.5em 0.2em; }
+  .side-badge__inner { display: inline-block; }
 </style>

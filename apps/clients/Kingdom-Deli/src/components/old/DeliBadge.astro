@@ -1,0 +1,63 @@
+---
+// DeliBadge — "Classic Deli Ticket" aesthetic.
+// Follows architecture from NoPorkBadge.
+
+interface Props {
+  /** Override default label (e.g., for a menu legend). Defaults to the tagline. */
+  label?: string;
+  /** Visual size. Default 'sm' for in-card placement. */
+  size?: 'sm' | 'md';
+}
+
+const { label = 'Deli', size = 'sm' } = Astro.props;
+---
+
+<span
+  class={`deli-badge deli-badge--${size}`}
+  role="img"
+  aria-label={label}
+  title={label}
+>
+  <span class="deli-badge__inner">{label}</span>
+</span>
+
+<style>
+  /* "Classic Deli Ticket" aesthetic: Charcoal dashed border on cream, slight rotation. */
+  .deli-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Manrope', sans-serif;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: #36454F; /* Charcoal */
+    background: #fdfaf3; /* Cream */
+    border: 1.5px dashed #36454F;
+    border-radius: 2px;
+    padding: 0.25em 0.55em 0.2em;
+    transform: rotate(1deg);
+    box-shadow: 0 1px 0 rgba(20, 17, 13, 0.05);
+    line-height: 1;
+    transition: transform 200ms ease;
+  }
+
+  .deli-badge:hover {
+    transform: translateY(-2px);
+    /* Sharp drop shadow using Brand Charcoal */
+    box-shadow: 4px 4px 0 #36454F; 
+  }
+
+  .deli-badge--sm {
+    font-size: 0.6875rem; /* ~11px */
+  }
+
+  .deli-badge--md {
+    font-size: 0.875rem;
+    padding: 0.35em 0.75em 0.3em;
+  }
+
+  .deli-badge__inner {
+    display: inline-block;
+  }
+</style>

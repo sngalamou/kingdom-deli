@@ -170,6 +170,36 @@ declare module 'astro:content' {
   collection: "menu";
   data: any
 };
+"old/bakery": {
+	id: "old/bakery";
+  collection: "menu";
+  data: any
+};
+"old/deli": {
+	id: "old/deli";
+  collection: "menu";
+  data: any
+};
+"old/dogs": {
+	id: "old/dogs";
+  collection: "menu";
+  data: any
+};
+"old/drinks": {
+	id: "old/drinks";
+  collection: "menu";
+  data: any
+};
+"old/plates": {
+	id: "old/plates";
+  collection: "menu";
+  data: any
+};
+"old/sides": {
+	id: "old/sides";
+  collection: "menu";
+  data: any
+};
 "plates": {
 	id: "plates";
   collection: "menu";

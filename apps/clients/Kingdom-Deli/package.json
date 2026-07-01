@@ -15,7 +15,6 @@
   "dependencies": {
     "@ngc/ui": "workspace:*",
     "@ngc/config": "workspace:*",
-    "@ngc/sanity-schemas": "workspace:*",
     "@ngc/square": "workspace:*",
     "astro": "^4.0.0",
     "@sanity/astro": "^3.1.7",

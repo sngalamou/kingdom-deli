@@ -1,0 +1,89 @@
+---
+// /order — review the cart built while browsing, then hand off to Square checkout.
+import BaseLayout from '@ngc/ui/layouts/BaseLayout.astro';
+import site from '../content/site.json';
+---
+<BaseLayout title="Order pickup — Kingdom Deli" brand={site.brand} footerTagline={site.footerTagline}>
+  <header class="order-header">
+    <h1>Your order</h1>
+    <p>We're in the Louis Joliet Mall food court — come in through Cinemark.</p>
+  </header>
+
+  <section class="order-cart">
+    <ul id="cart-lines" class="cart-lines"></ul>
+    <p id="cart-empty" class="cart-empty" hidden>
+      Your order is empty. <a href="/menu">Browse the menu</a> to add items.
+    </p>
+
+    <button id="checkout" class="cta-primary" disabled>Checkout</button>
+    <p id="order-err" class="order-error" hidden></p>
+  </section>
+
+  <section class="order-footer">
+    <h2>How pickup works</h2>
+    <p>Pay online, then come to the counter — we'll have your order ready.</p>
+  </section>
+
+  <script>
+    import { getCart, setQty, cartCount } from '../lib/cart';
+
+    const linesEl = document.getElementById('cart-lines');
+    const emptyEl = document.getElementById('cart-empty');
+    const btn = document.getElementById('checkout');
+    const errEl = document.getElementById('order-err');
+
+    const render = () => {
+      const cart = getCart();
+      linesEl.innerHTML = '';
+      for (const line of cart) {
+        const li = document.createElement('li');
+        li.className = 'cart-line';
+        li.innerHTML = `
+          <span class="cart-line-name"></span>
+          <span class="cart-line-controls">
+            <button type="button" class="qty-dec" aria-label="Remove one">–</button>
+            <output class="qty">${line.quantity}</output>
+            <button type="button" class="qty-inc" aria-label="Add one">+</button>
+            <button type="button" class="line-remove">Remove</button>
+          </span>`;
+        li.querySelector('.cart-line-name').textContent = line.label;
+        li.querySelector('.qty-dec').addEventListener('click', () => setQty(line.variationId, line.quantity - 1));
+        li.querySelector('.qty-inc').addEventListener('click', () => setQty(line.variationId, line.quantity + 1));
+        li.querySelector('.line-remove').addEventListener('click', () => setQty(line.variationId, 0));
+        linesEl.appendChild(li);
+      }
+      const empty = cart.length === 0;
+      emptyEl.hidden = !empty;
+      btn.disabled = empty;
+    };
+
+    btn.addEventListener('click', async () => {
+      errEl.hidden = true;
+      btn.disabled = true; btn.textContent = 'Starting…';
+      const lineItems = getCart().map(({ variationId, quantity }) => ({ variationId, quantity }));
+      try {
+        const r = await fetch('/api/checkout', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ lineItems }),
+        });
+        const data = await r.json();
+        if (r.ok && data.url) { window.location.href = data.url; return; } // cart cleared on /thanks
+        console.error('checkout failed:', data);                            // detail for you
+        throw new Error();
+      } catch {
+        errEl.hidden = false;
+        errEl.textContent = 'Could not start checkout. Please try again.';
+        btn.disabled = false; btn.textContent = 'Checkout';
+      }
+    });
+
+    window.addEventListener('cart-updated', render);
+    window.addEventListener('storage', render);
+    render();
+  </script>
+</BaseLayout>
+<script>
+  import { initAddButtons } from '../lib/cart';
+  initAddButtons();
+</script>

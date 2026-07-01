@@ -1,0 +1,65 @@
+---
+// DesertBadge — Henry's "Desert" tagline as a butcher's-stamp-style chip.
+// Used on menuItem cards where item.noPork === false && item.desert === true.
+// See ADR 0003.
+
+interface Props {
+  /** Override default label (e.g., for a menu legend). Defaults to the tagline. */
+  label?: string;
+  /** Visual size. Default 'sm' for in-card placement. */
+  size?: 'sm' | 'md';
+}
+
+const { label = 'Desert', size = 'sm' } = Astro.props;
+---
+
+<span
+  class={`desert desert--${size}`}
+  role="img"
+  aria-label={label}
+  title={label}
+>
+  <span class="desert__inner">{label}</span>
+</span>
+
+<style>
+  /* Desert aesthetic: deep red on cream, slight rotation, decisive border.
+   * Reads like strawberry drizzle on ice-cream dropped on the menu card. */
+  .desert {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-display, 'Alfa Slab One', Georgia, serif);
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--color-meatred-500, #a32424);
+    background: var(--color-cream-50, #fdfaf3);
+    border: 1.5px solid var(--color-meatred-500, #a32424);
+    border-radius: 2px;
+    padding: 0.25em 0.55em 0.2em;
+    transform: rotate(-3deg);
+    box-shadow: 0 1px 0 rgba(20, 17, 13, 0.05);
+    line-height: 1;
+    transition: transform 200ms ease;
+  }
+
+  .deserthover {
+    transform: translateY(-2px);
+    /* Sharp drop shadow using Brand Charcoal */
+    box-shadow: 4px 4px 0 #36454F; 
+  }
+
+  .desert--sm {
+    font-size: 0.6875rem; /* ~11px */
+  }
+
+  .desert--md {
+    font-size: 0.875rem;
+    padding: 0.35em 0.75em 0.3em;
+  }
+
+  .desert__inner {
+    display: inline-block;
+  }
+</style>

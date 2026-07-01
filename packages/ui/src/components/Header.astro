@@ -24,17 +24,29 @@ const {
 ---
 
 <header class="site-header">
-<!--  <a href="/" class="brand"><img src="/images/logo/logo1.jng" alt="Kingdom Deli" width="160" height="48" /></a>    -->
-  <a href="/" class="brand"><img src="/images/logo/logo.jpg" alt="Kingdom Delis" width="160" height="48" /></a>
+<!--  <a href="/" class="brand"><img src="/images/logo/logo1.png" alt="Kingdom Deli" width="160" height="48" /></a>    -->
+  <a href="/" class="brand"><img src="/images/logo/logo.png" alt="Kingdom Delis" width="60" height="60" /></a>
   <nav aria-label="Primary">
     <ul>
       {links.map((link) => (
         <li><a href={link.href}>{link.label}</a></li>
       ))}
     </ul>
+	<a href="/order" class="cart-link">Order (<span id="cart-count">0</span>)</a>
   </nav>
 </header>
-
+<script>
+  const KEY = 'kd-cart';                 // must equal cart.ts's KEY
+  const el = document.getElementById('cart-count');
+  const update = () => {
+    let n = 0;
+    try { n = JSON.parse(localStorage.getItem(KEY) || '[]').reduce((s, i) => s + i.quantity, 0); } catch {}
+    if (el) el.textContent = String(n);
+  };
+  window.addEventListener('cart-updated', update);
+  window.addEventListener('storage', update);
+  update();
+</script>
 <style>
   .site-header {
     display: flex;

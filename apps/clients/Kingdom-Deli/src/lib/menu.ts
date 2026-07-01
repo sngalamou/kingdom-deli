@@ -13,21 +13,19 @@ import sides from '../content/menu/sides.json';
 import drinks from '../content/menu/drinks.json';
 import bakery from '../content/menu/bakery.json';
 
+/** The six menu sections. An item's badge is derived from this. */
+export type CategorySlug = 'deli' | 'dogs' | 'plates' | 'sides' | 'drinks' | 'bakery';
+
 export interface MenuItem {
   id: string;
   name: string;
   description?: string;
   price: number;
-  noPork: boolean;
-  isDeli: boolean;
-  isDessert: boolean;
-  isDogs: boolean;
-  isDrinks: boolean;
-  isPlate: boolean;
-  isSide: boolean;
-  squareSku?: string;
+  /** Drives the category badge (and, for 'dogs', the No-Pork stamp). */
+  category: CategorySlug;
   available: boolean;
   featured?: boolean;
+  image?: string;
 }
 
 export interface MenuCategory {

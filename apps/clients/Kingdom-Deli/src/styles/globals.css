@@ -1,14 +1,17 @@
 /* Kingdom Deli — globals.
  *
- * Light reset + prose defaults. Component-specific styling lives in each
- * component's <style> block. This file is for things that need to be global:
- * box-sizing, link defaults, list resets in nav contexts.
+ * Reset + prose + form controls + the shared add-to-order control (.add-control /
+ * .ac-*) used by menu cards AND the /order cart list, defined globally so it also
+ * styles the controls cart.ts injects at runtime.
  *
- * Imported by BaseLayout indirectly via tokens.css cascade — load order:
- *   1. @ngc/config/tokens.css (base layer)
- *   2. apps/clients/kingdom-deli/src/styles/tokens.css (client layer)
- *   3. this file (cascade order, no layer — applies to bare element selectors)
+ * The .ac-* control colors carry LOGO-PALETTE fallbacks (gold #d4a017,
+ * warm-black #1a1611, cream #f7f1de) so the steppers render on-brand even if
+ * tokens.css hasn't loaded.
  */
+
+:root {
+  color-scheme: dark;
+}
 
 *,
 *::before,
@@ -45,39 +48,155 @@ ol[role='list'] {
   padding: 0;
 }
 
-/* Focus ring — visible, mustard-yellow, not a default browser blue. */
 :focus-visible {
-  outline: 3px solid var(--color-mustard-400, currentColor);
+  outline: 3px solid var(--color-mustard-400, #e8b837);
   outline-offset: 2px;
+}
+
+input,
+textarea,
+select {
+  background: var(--color-bg-alt, #262019);
+  color: var(--color-text, #f7f1de);
+  border: 1px solid var(--color-charcoal-700, #3a3127);
+  border-radius: var(--radius-sm, 2px);
+  padding: var(--space-2, 0.5rem) var(--space-3, 0.75rem);
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: var(--color-text-muted, #beb39b);
+  opacity: 0.8;
+}
+
+* {
+  scrollbar-color: var(--color-charcoal-700, #3a3127) transparent;
+}
+
+/* ============================================================
+ * Add-to-order control — shared by menu cards and the /order cart.
+ *   default     : gold "+" circle
+ *   in cart     : ✕ ‹ N › stepper (✕ clears, ‹ removes one, › adds one)
+ *   most-recent : 🛒 shortcut to /order to the right (browse pages only)
+ * Logo-palette fallbacks so it renders on-brand without tokens.css.
+ * ============================================================ */
+.add-control {
+  display: inline-flex;
+  flex-direction: row;        /* 🛒 sits to the RIGHT of the ‹ N › stepper */
+  align-items: center;
+  gap: var(--space-2, 0.5rem);
+  margin-inline-start: auto;
+}
+
+.ac-stepper {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2, 0.5rem);
+}
+
+.ac-btn {
+  flex: 0 0 auto;
+  width: 2rem;
+  height: 2rem;
+  border: none;
+  border-radius: 999px;
+  background: var(--color-accent, #d4a017);
+  color: var(--color-charcoal-900, #1a1611);
+  font-size: 1.2rem;
+  line-height: 1;
+  font-weight: 700;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  transition: transform 120ms ease, filter 120ms ease, background-color 120ms ease;
+}
+.ac-btn:hover { filter: brightness(0.96); }
+.ac-btn:active { transform: scale(0.9); }
+
+.ac-dec,
+.ac-inc {
+  background: transparent;
+  color: var(--color-accent, #d4a017);
+  border: 1.5px solid var(--color-accent, #d4a017);
+  font-size: 1.15rem;
+}
+.ac-dec:hover,
+.ac-inc:hover {
+  background: var(--color-accent, #d4a017);
+  color: var(--color-charcoal-900, #1a1611);
+  filter: none;
+}
+
+/* clear the whole line — sits to the LEFT of the stepper; crimson to signal removal */
+.ac-clear {
+  background: transparent;
+  color: var(--color-accent-alt, #c8102e);
+  border: 1.5px solid var(--color-accent-alt, #c8102e);
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+.ac-clear:hover {
+  background: var(--color-accent-alt, #c8102e);
+  color: var(--color-cream-100, #f7f1de);
+  filter: none;
+}
+
+.ac-count {
+  min-width: 1.4rem;
+  text-align: center;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  color: var(--color-text, #f7f1de);
+}
+
+.ac-cart {
+  font-size: 1.05rem;
+  line-height: 1;
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform 120ms ease;
+}
+.ac-cart:hover { transform: scale(1.15); }
+
+.add-control.pop { animation: ac-pop 200ms ease; }
+@keyframes ac-pop {
+  0% { transform: scale(1); }
+  45% { transform: scale(1.18); }
+  100% { transform: scale(1); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .add-control.pop { animation: none; }
 }
 
 /* Prose container — usable on any text-heavy section. */
 .prose {
   max-width: 38rem;
-  font-family: var(--font-body);
-  font-size: var(--fs-body);
-  line-height: var(--lh-loose);
-  color: var(--color-text);
+  font-family: var(--font-body, Georgia, serif);
+  font-size: var(--fs-body, 1.0625rem);
+  line-height: var(--lh-loose, 1.7);
+  color: var(--color-text, #f7f1de);
 }
 
 .prose > * + * {
-  margin-top: var(--space-4);
+  margin-top: var(--space-4, 1rem);
 }
 
 .prose h2,
 .prose h3 {
-  font-family: var(--font-display);
-  margin-top: var(--space-8);
-  margin-bottom: var(--space-3);
-  line-height: var(--lh-snug);
+  font-family: var(--font-display, Georgia, serif);
+  margin-top: var(--space-8, 2rem);
+  margin-bottom: var(--space-3, 0.75rem);
+  line-height: var(--lh-snug, 1.25);
 }
 
 .prose a {
-  color: var(--color-accent-alt);
+  color: var(--color-accent, #d4a017);
   text-decoration: underline;
+  text-decoration-color: var(--color-mustard-600, #b07c08);
   text-underline-offset: 0.15em;
 }
 
 .prose a:hover {
-  color: var(--color-mustard-600);
+  color: var(--color-mustard-400, #e8b837);
+  text-decoration-color: var(--color-mustard-400, #e8b837);
 }

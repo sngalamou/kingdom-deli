@@ -1,0 +1,40 @@
+---
+// CategoryBadge — picks a menu item's badge from its category slug.
+// Replaces the old per-item boolean flags (isDeli/isDogs/.../noPork).
+// The 'dogs' line is all-beef, so it also gets the "No pork on my fork" stamp.
+//
+// NOTE: adjust these import paths to wherever the badge files actually live
+// relative to this component.
+import DeliBadge from './DeliBadge.astro';
+import DogsBadge from './DogsBadge.astro';
+import PlateBadge from './PlateBadge.astro';
+import SideBadge from './SideBadge.astro';
+import DrinksBadge from './DrinksBadge.astro';
+import DessertBadge from './DessertBadge.astro';
+import NoPorkBadge from './NoPorkBadge.astro';
+
+export type CategorySlug = 'deli' | 'dogs' | 'plates' | 'sides' | 'drinks' | 'bakery';
+
+interface Props {
+  category: CategorySlug;
+  /** Forwarded to the badges. Default 'sm' for in-card placement. */
+  size?: 'sm' | 'md';
+}
+
+const { category, size = 'sm' } = Astro.props;
+
+const CATEGORY_BADGE = {
+  deli:   DeliBadge,
+  dogs:   DogsBadge,
+  plates: PlateBadge,
+  sides:  SideBadge,
+  drinks: DrinksBadge,
+  bakery: DessertBadge,
+} as const;
+
+const Badge = CATEGORY_BADGE[category];
+const showNoPork = category === 'dogs';
+---
+
+{Badge && <Badge size={size} />}
+{showNoPork && <NoPorkBadge size={size} />}

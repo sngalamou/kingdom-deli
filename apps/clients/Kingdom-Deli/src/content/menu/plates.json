@@ -3,72 +3,131 @@
     "name": "Plates",
     "slug": "plates",
     "displayOrder": 3,
-    "description": "Heartier sit-down options."
+    "description": "Heartier mains, wings, and tacos."
   },
   "items": [
     {
-      "id": "jerk-chicken-plate",
-      "name": "Jerk Chicken Plate",
-      "description": "Slow-marinated jerk chicken, rice and peas, plantains, slaw.",
-      "price": 13.95,
-      "noPork": false,
-      "isDessert": false,
-      "isSide": false,
-      "isPlate": true,
-      "isDeli": false,
-      "isDrinks": false,
-      "isDogs": false,
-      "squareSku": "PLT-JERK-01",
+      "id": "jerk-chicken-tips",
+      "name": "Jerk Chicken Tips",
+      "description": "Marinated jerk chicken tips, slow-cooked and tender. Served with rice and peas.",
+      "price": 13.99,
+      "category": "plates",
+      "available": true,
       "featured": true,
-      "image": "/images/menu/jerk-chicken-plate.jpg",
+      "image": "/images/menu/jerk-chicken-plate.jpg"
+    },
+    {
+      "id": "jamaica-jerk-chicken",
+      "name": "Jamaican Jerk Chicken",
+      "description": "Marinated jerk chicken, slow-cooked. Served with rice and peas, plantains, and slaw.",
+      "price": 9.99,
+      "category": "plates",
       "available": true
     },
     {
-      "id": "jerk-chicken-sandwich",
-      "name": "Jerk Chicken Sandwich",
-      "description": "Jerk chicken thigh on a brioche bun, slaw, jerk aioli.",
-      "price": 11.95,
-      "noPork": false,
-      "isDessert": false,
-      "isSide": false,
-      "isPlate": true,
-      "isDeli": false,
-      "isDrinks": false,
-      "isDogs": false,
-      "squareSku": "PLT-JERKSW-01",
-      "image": "/images/menu/jerk-chicken-sandwich.svg",
+      "id": "chicken-waffles",
+      "name": "Chicken & Waffles",
+      "description": "Chicken wings with waffles and syrup.",
+      "price": 12.99,
+      "category": "plates",
+      "available": true
+    },
+    {
+      "id": "chicken-mild-sauce",
+      "name": "Chicken & Mild Sauce",
+      "description": "Crispy fried chicken in mild sauce, served over fresh-cut fries. South side classic.",
+      "price": 8.99,
+      "category": "plates",
+      "available": true
+    },
+    {
+      "id": "chicken-on-a-stick",
+      "name": "Chicken On A Stick",
+      "description": "Breaded chicken on a skewer, fried golden. Served with fresh-cut fries.",
+      "price": 10.99,
+      "category": "plates",
+      "available": true
+    },
+    {
+      "id": "chicken-rings",
+      "name": "Chicken Rings",
+      "description": "Tender breaded chicken rings, fried crisp. Comes with dipping sauce.",
+      "price": 8.99,
+      "category": "plates",
+      "available": true
+    },
+    {
+      "id": "chicken-wings-4pc",
+      "name": "Chicken Wings (4 pc)",
+      "description": "Four jumbo wings, fried crisp. Choose mild, hot, BBQ, or lemon pepper.",
+      "price": 8.99,
+      "category": "plates",
+      "available": true
+    },
+    {
+      "id": "chicken-wings-6pc",
+      "name": "Chicken Wings (6 pc)",
+      "description": "Six jumbo wings, fried crisp. Choose mild, hot, BBQ, or lemon pepper.",
+      "price": 10.99,
+      "category": "plates",
+      "available": true
+    },
+    {
+      "id": "wing-tip-combo",
+      "name": "Wing & Tip Combo",
+      "description": "Four jumbo chicken wings plus jerk chicken tips. Comes with fries and a fountain soda.",
+      "price": 15.99,
+      "category": "plates",
+      "available": true
+    },
+    {
+      "id": "pizza-puffs",
+      "name": "Pizza Puffs",
+      "description": "Deep-fried pillows of dough with pizza filling. South side staple.",
+      "price": 7.99,
+      "category": "plates",
       "available": true
     },
     {
       "id": "beef-tacos",
-      "name": "Beef Tacos (3)",
-      "description": "Seasoned ground beef, onion, cilantro, lime, choice of corn or flour.",
-      "price": 9.95,
-      "noPork": false,
-      "isDessert": false,
-      "isSide": false,
-      "isPlate": true,
-      "isDeli": false,
-      "isDrinks": false,
-      "isDogs": false,
-      "squareSku": "PLT-TACO-01",
-      "image": "/images/menu/beef-tacos.svg",
-      "available": true
+      "name": "Beef Tacos",
+      "description": "Three soft tacos with beef, onion, and cilantro on a corn tortilla. Also available as a Taco Dinner — $16.99.",
+      "price": 11.99,
+      "category": "plates",
+      "available": true,
+      "image": "/images/menu/beef-tacos.svg"
     },
     {
       "id": "chicken-tacos",
-      "name": "Chicken Tacos (3)",
-      "description": "Grilled chicken, salsa verde, onion, cilantro, lime.",
-      "price": 9.95,
-      "noPork": false,
-      "isDessert": false,
-      "isSide": false,
-      "isPlate": true,
-      "isDeli": false,
-      "isDrinks": false,
-      "isDogs": false,
-      "squareSku": "PLT-TACOCHX-01",
-      "image": "/images/menu/jerk-chicken-tacos.svg",
+      "name": "Chicken Tacos",
+      "description": "Three soft tacos with grilled chicken, salsa verde, onion, cilantro, and lime.",
+      "price": 10.99,
+      "category": "plates",
+      "available": true,
+      "image": "/images/menu/jerk-chicken-tacos.svg"
+    },
+    {
+      "id": "steak-tacos",
+      "name": "Steak Tacos",
+      "description": "Three soft tacos with grilled steak, onion, cilantro, and lime.",
+      "price": 10.99,
+      "category": "plates",
+      "available": true
+    },
+    {
+      "id": "jerk-tacos",
+      "name": "Jerk Tacos (3)",
+      "description": "Three soft tacos with jerk chicken, slaw, jerk aioli, and lime.",
+      "price": 11.99,
+      "category": "plates",
+      "available": true
+    },
+    {
+      "id": "mexican-tacos",
+      "name": "Mexican-Style Tacos",
+      "description": "Three traditional tacos with seasoned beef, onion, cilantro, and lime on corn tortillas.",
+      "price": 8.99,
+      "category": "plates",
       "available": true
     }
   ]

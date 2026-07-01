@@ -1,60 +1,42 @@
 ---
-// DogsBadge — The 'Chicago Neon' category badge.
-// Shares the standard prop interface used across menu items[cite: 2].
-
+// DogsBadge — bright-red pill on cream. Crimson family (meats); the lively
+// Chicago-dog member of the trio.
 interface Props {
-  /** Override default label (e.g., for a menu legend). Defaults to the category name[cite: 3]. */
+  /** Override default label (e.g., for a menu legend). Defaults to the category name. */
   label?: string;
-  /** Visual size. Default 'sm' for in-card placement[cite: 4]. */
+  /** Visual size. Default 'sm' for in-card placement. */
   size?: 'sm' | 'md';
 }
-
 const { label = 'Dogs', size = 'sm' } = Astro.props;
 ---
 
-<span
-  class={`dogs-badge dogs-badge--${size}`}
-  role="img"
-  aria-label={label}
-  title={label}
->
+<span class={`dogs-badge dogs-badge--${size}`} role="img" aria-label={label} title={label}>
   <span class="dogs-badge__inner">{label}</span>
 </span>
 
 <style>
-  /* 'Chicago Neon' aesthetic: Electric Blue on Charcoal with a pill shape. */
+  /* Bright-red pill — the snappy, classic-Chicago-dog member of the meat family. */
   .dogs-badge {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    font-family: 'Manrope', sans-serif;
+    font-family: var(--font-display, Georgia, 'Times New Roman', serif);
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.06em;
-    color: #a32424;
-    background: var(--color-cream-50, #fdfaf3);
-    border: 1.5px solid #a32424;
+    color: var(--color-meatred-400, #e0263b);
+    background: var(--color-cream-100, #f7f1de);
+    border: 1.5px solid var(--color-meatred-400, #e0263b);
     border-radius: 999px;
     padding: 0.25em 0.6em 0.2em;
     line-height: 1;
     transition: transform 200ms ease, box-shadow 200ms ease;
   }
-
   .dogs-badge:hover {
     transform: translateY(-2px);
-    /* Sharp drop shadow using Brand Charcoal */
-    box-shadow: 4px 4px 0 #36454F; 
+    box-shadow: 3px 3px 0 var(--color-meatred-400, #e0263b);
   }
-  .dogs-badge--sm {
-    font-size: 0.6875rem; 
-  }
-
-  .dogs-badge--md {
-    font-size: 0.875rem;
-    padding: 0.35em 0.8em 0.3em;
-  }
-
-  .dogs-badge__inner {
-    display: inline-block;
-  }
+  .dogs-badge--sm { font-size: 0.6875rem; }
+  .dogs-badge--md { font-size: 0.875rem; padding: 0.35em 0.8em 0.3em; }
+  .dogs-badge__inner { display: inline-block; }
 </style>

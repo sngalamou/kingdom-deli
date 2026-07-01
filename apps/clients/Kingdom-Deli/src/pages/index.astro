@@ -7,14 +7,16 @@
 // stays the same.
 import BaseLayout from '@ngc/ui/layouts/BaseLayout.astro';
 import '../styles/tokens.css';
+import '../styles/globals.css';
 import Hero from '@ngc/ui/components/Hero.astro';
 import HoursBlock from '@ngc/ui/components/HoursBlock.astro';
 import MenuItem from '@ngc/ui/components/MenuItem.astro';
-import NoPorkBadge from '../components/NoPorkBadge.astro';
+import CategoryBadge from '../components/CategoryBadge.astro';
 import WayfindingCard from '../components/WayfindingCard.astro';
 import site from '../content/site.json';
 import location from '../content/location.json';
 import { getFeaturedItems } from '../lib/menu';
+import { resolveVariationId } from '../lib/orderable';
 
 const featured = getFeaturedItems();
 const pageTitle = `${site.brand} — ${site.tagline} ${location.parentVenue}.`;
@@ -33,7 +35,7 @@ const pageTitle = `${site.brand} — ${site.tagline} ${location.parentVenue}.`;
     <a slot="cta-secondary" href="/menu">{site.ctaCopy.orderSecondary}</a>
 	<section class="hero">
 	  <img
-		src="/images/hero/home-hero.jpg"
+		src="/images/hero/home-hero.png"
 		alt="Pastrami sandwich on rye, hand-cut and stacked high"
 		width="2400"
 		height="1600"
@@ -54,8 +56,8 @@ const pageTitle = `${site.brand} — ${site.tagline} ${location.parentVenue}.`;
       </header>
       <div class="featured-grid">
         {featured.map((item) => (
-          <MenuItem item={{ name: item.name, description: item.description, price: item.price }}>
-            {item.noPork && <NoPorkBadge slot="badge" />}
+          <MenuItem item={{ name: item.name, description: item.description, price: item.price, category: item.category, variationId: resolveVariationId(item.name) }}>
+            <CategoryBadge slot="badge" category={item.category} />
           </MenuItem>
         ))}
       </div>
@@ -196,3 +198,7 @@ const pageTitle = `${site.brand} — ${site.tagline} ${location.parentVenue}.`;
     object-fit: cover;
   }
 </style>
+<script>
+  import { initAddButtons } from '../lib/cart';
+  initAddButtons();
+</script>

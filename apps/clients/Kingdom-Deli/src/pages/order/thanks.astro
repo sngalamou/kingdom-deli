@@ -1,0 +1,39 @@
+---
+// src/pages/order/thanks.astro — Square redirects here after payment. Serves /order/thanks/.
+import BaseLayout from '@ngc/ui/layouts/BaseLayout.astro';
+import site from '../../content/site.json';
+---
+<BaseLayout title="Order received — Kingdom Deli" description="Your pickup order is in." brand={site.brand} footerTagline={site.footerTagline}>
+  <section class="section thanks">
+    <p class="thanks-kicker">Payment received</p>
+    <h1>You're all set.</h1>
+    <p class="thanks-lede">Thanks for ordering — come to the counter and we'll have it ready.</p>
+    <p class="thanks-ref" id="order-ref" hidden>Order reference: <span id="order-ref-value"></span></p>
+    <div class="thanks-pickup">
+      <h2>Picking up</h2>
+      <p>We're in the Louis Joliet Mall food court — come in through Cinemark.</p>
+    </div>
+    <div class="cta-pair">
+      <a href="/menu" class="cta-secondary">Back to menu</a>
+      <a href="/" class="cta-primary">Home</a>
+    </div>
+  </section>
+  <script>
+    import { clearCart } from '../../lib/cart';
+    clearCart(); // payment confirmed (Square only redirects here on success)
+    const p = new URLSearchParams(window.location.search);
+    const ref = p.get('orderId') || p.get('transactionId') || p.get('checkoutId');
+    if (ref) {
+      document.getElementById('order-ref-value').textContent = ref;
+      document.getElementById('order-ref').hidden = false;
+    }
+  </script>
+  <style>
+    .thanks { max-width: 40rem; margin-inline: auto; text-align: center; }
+    .thanks-kicker { text-transform: uppercase; letter-spacing: .08em; font-size: .85rem; font-weight: 700; opacity: .7; margin: 0 0 .5rem; }
+    .thanks-lede { font-size: 1.15rem; margin: 0 auto 1.5rem; }
+    .thanks-ref { display: inline-block; padding: .5rem .75rem; border: 1px solid currentColor; border-radius: .5rem; margin-bottom: 1.75rem; word-break: break-all; }
+    .thanks-pickup { text-align: left; max-width: 30rem; margin: 0 auto 2rem; }
+    .cta-pair { display: flex; gap: .75rem; justify-content: center; flex-wrap: wrap; }
+  </style>
+</BaseLayout>

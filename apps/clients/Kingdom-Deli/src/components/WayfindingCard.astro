@@ -25,37 +25,37 @@ const { heading = 'Fastest way in' } = Astro.props;
 </aside>
 
 <style>
-  /* Old-school deli directory card.
-   * Boxed, mustard offset shadow (like a sign printed on a press),
-   * uppercase slab heading, deep-red emphasis on the entrance keyword. */
+  /* Old-school deli directory card: cream "printed sign" with a charcoal border,
+   * a hard gold offset shadow, uppercase slab heading, crimson entrance keyword. */
   .wayfinding-card {
     position: relative;
     background: var(--color-cream-100, #f7f1de);
-    border: 2px solid var(--color-charcoal-900, #15110d);
+    border: 2px solid var(--color-charcoal-900, #1a1611);
     padding: 1.5rem 1.75rem 1.75rem;
     max-width: 28rem;
-    color: var(--color-charcoal-900, #15110d);
+    color: var(--color-charcoal-900, #1a1611);
     box-shadow: 6px 6px 0 var(--color-mustard-500, #d4a017);
+    transition: transform 200ms ease, box-shadow 200ms ease;
   }
-  
+
   .wayfinding-card:hover {
     transform: translateY(-2px);
-    /* Sharp drop shadow using Brand Charcoal */
-    box-shadow: 4px 4px 0 #36454F; 
+    /* deepen the gold offset shadow on lift (brand, not slate) */
+    box-shadow: 8px 8px 0 var(--color-mustard-600, #b07c08);
   }
-  
+
   .wayfinding-card__rule {
     position: absolute;
     top: 0.4rem;
     left: 0.4rem;
     right: 0.4rem;
     height: 1px;
-    background: var(--color-charcoal-900, #15110d);
+    background: var(--color-charcoal-900, #1a1611);
     opacity: 0.4;
   }
 
   .wayfinding-card__heading {
-    font-family: var(--font-display, 'Alfa Slab One', Georgia, serif);
+    font-family: var(--font-display, Georgia, serif);
     font-size: 1.5rem;
     text-transform: uppercase;
     letter-spacing: 0.04em;
@@ -70,7 +70,7 @@ const { heading = 'Fastest way in' } = Astro.props;
   }
 
   .wayfinding-card__direction strong {
-    color: var(--color-meatred-500, #a32424);
+    color: var(--color-meatred-500, #c8102e);
     font-weight: 700;
   }
 

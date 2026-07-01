@@ -1,241 +1,113 @@
 ---
+// /order — holy-grail layout: full-width header + footer, three columns with
+// "My cart" as the fluid CENTER, pickup info on the left, Total/Checkout on the
+// right. Cart logic + Square checkout unchanged. Every var() keeps a logo-palette
+// fallback so the page renders on-brand even if tokens.css hasn't loaded.
 import BaseLayout from '@ngc/ui/layouts/BaseLayout.astro';
 import site from '../content/site.json';
-
-// Paste from /api/catalog output. This is the orderable list; price is NOT here (Square owns it).
-const orderable = [
-    {
-        "label": "Chicago Style Polish",
-        "variationId": "Q5HJPVGCAQSIVVJUJ7TDIQGL"
-    },
-    {
-        "label": "Pastrami",
-        "variationId": "TTDYROT7TBMUOKNA7GNVBB3A"
-    },
-    {
-        "label": "Chicago Style Hot Dog",
-        "variationId": "PDOEH5DDMCBP4WJPJGLBHYG7"
-    },
-    {
-        "label": "Corn beef",
-        "variationId": "Z22IVJ347E34OVUU46FEIED6"
-    },
-    {
-        "label": "Chicken Wings 4pc",
-        "variationId": "2NWP2B3ZWKKJ5PGOX7XDVYIR"
-    },
-    {
-        "label": "Steak Tacos",
-        "variationId": "DK6ZVUZQLS7A7C5J3KJXHQ4D"
-    },
-    {
-        "label": "Cheeseburger",
-        "variationId": "XE5BWCKPKMA3JTUZ3VNE4YND"
-    },
-    {
-        "label": "Hamburger",
-        "variationId": "OZHVAWV3GGVVD3X77UH6XS57"
-    },
-    {
-        "label": "Chicken Wrap",
-        "variationId": "5PGJ4ZOTESMMYXO7V3K6HBW3"
-    },
-    {
-        "label": "Jerk Chicken Tips",
-        "variationId": "CZETE4YTI2QANKX225NJQJBX"
-    },
-    {
-        "label": "Soda Regular",
-        "variationId": "5ZY4AAWWKGZ4SHHGWIJGT4IC"
-    },
-    {
-        "label": "Old Fashion Butter Cookies",
-        "variationId": "IYGI7PN6EGF64IIZBINO5QDL"
-    },
-    {
-        "label": "Pizza Puffs",
-        "variationId": "5DZA57YMXTRTVBFXMQJ7WNWW"
-    },
-    {
-        "label": "Jerk Philly",
-        "variationId": "H3Q67UD7EVLWBZCRKSK7BOAK"
-    },
-    {
-        "label": "Veggie Wrap",
-        "variationId": "OZGGRN5VDY5IG2MCPBWNC74C"
-    },
-    {
-        "label": "Jerk Tacos 3",
-        "variationId": "3OYTKPEOA3PKDYEXIJU4GMIY"
-    },
-    {
-        "label": "Chicken On A Stick",
-        "variationId": "JDDEZPRRZL2L3MYODMQOGHBF"
-    },
-    {
-        "label": "Chicken Rings",
-        "variationId": "NVY7Q6FSCBKT2HZGBFW6VV5H"
-    },
-    {
-        "label": "Bottled Water",
-        "variationId": "FJEK73ZEDUZYS7VNHCYLLNGN"
-    },
-    {
-        "label": "Chicken Tacos",
-        "variationId": "RXIHOOXMH5Y6DML57E5YQZGC"
-    },
-    {
-        "label": "Italian Beef",
-        "variationId": "MUQDTKCODGIXI4C5HSLWUGCF"
-    },
-    {
-        "label": "Cakes",
-        "variationId": "4HPTU3RKMMAJFM4KIA6GFR7F"
-    },
-    {
-        "label": "Chicken & Waffles",
-        "variationId": "MJMAS6AFEM4CSDET3F3RKKME"
-    },
-    {
-        "label": "Maxwell Polish",
-        "variationId": "URYLCKAMESMWELI3ZAETQ35Z"
-    },
-    {
-        "label": "Chicken Wings 6pcs",
-        "variationId": "FDIKWT357MXTEBMIBSOYPBVW"
-    },
-    {
-        "label": "Jerk Wrap",
-        "variationId": "XDCCY7MDSPAQMZH47OHPATLT"
-    },
-    {
-        "label": "Fries",
-        "variationId": "E63PYKGPROEHHD4BT6B7V34L"
-    },
-    {
-        "label": "Soda Large",
-        "variationId": "Z2ODWEYNCDQ7MFHWMMO2ZIL4"
-    },
-    {
-        "label": "Add Combo",
-        "variationId": "YIY2DQ7SGC5XWUVYIZGRKZ73"
-    },
-    {
-        "label": "Wing & Tip Combo",
-        "variationId": "OR55GQJNEFTCHTM677G5RLL2"
-    },
-    {
-        "label": "Buffalo Wings",
-        "variationId": "TPUU6TIXNKNSDKNPSAWS4A5G"
-    },
-    {
-        "label": "Chicken & Mild Sauce",
-        "variationId": "SIJUO7P66A3DOGWL3FRLLHBI"
-    },
-    {
-        "label": "Jamaica Jerk Chicken",
-        "variationId": "WDIRD44LS56RM37NNEVOFNSS"
-    },
-    {
-        "label": "Mexican style tacos",
-        "variationId": "CAFI3OZ6QR3EMKFYVY5A4X2R"
-    },
-    {
-        "label": "Mama's Cole Slaw",
-        "variationId": "BWDALFKWWBQZWTEE27PUIEZB"
-    },
-    {
-        "label": "Chocolate Cake",
-        "variationId": "TPSR5TFZZEB7DZBHE2TV2GLD"
-    },
-    {
-        "label": "German Chocolate Cake",
-        "variationId": "DXWDMFPSEPBHYXADWXDIWNM4"
-    },
-    {
-        "label": "Pound Cake",
-        "variationId": "PKRO3P3G53GXNIIFCTZNXSLQ"
-    },
-    {
-        "label": "Coconut Cake",
-        "variationId": "DB5DWRO4SVL445SFVRGPNWWP"
-    },
-    {
-        "label": "Lemonade — Large",
-        "variationId": "7EIEVHPKQKC6SN2ACAOMSHXG"
-    },
-    {
-        "label": "Lemonade",
-        "variationId": "EOF7YEDDJDXRFXEEDVUUQVKS"
-    },
-    {
-        "label": "Cheese Fries",
-        "variationId": "QEVFRX67UYERLRVHHD423GW3"
-    },
-    {
-        "label": "Beef Tacos — 3 Tacos",
-        "variationId": "YOESLGWK4TDWCDRZYFTJHR7P"
-    },
-    {
-        "label": "Beef Tacos — Taco Dinner",
-        "variationId": "O5DZQJHTJHPG6QY3XUI5JYGL"
-    }
-];
 ---
 <BaseLayout title="Order pickup — Kingdom Deli" brand={site.brand} footerTagline={site.footerTagline}>
-  <header class="order-header">
-    <h1>Order for pickup</h1>
-    <p>We're in the Louis Joliet Mall food court — come in through Cinemark.</p>
-  </header>
+  <div class="order-hg">
+    <!-- HEADER (spans all three) -->
+    <header class="hg-header">
+      <a href="/menu" class="back-link">&larr; Back to menu</a>
+      <h1>Your order</h1>
+      <p class="hg-sub">We're in the Louis Joliet Mall food court — come in through Cinemark.</p>
+    </header>
 
-  <ul class="cart" id="cart">
-    {orderable.map((it) => (
-      <li class="cart-row">
-        <span class="cart-name">{it.label}</span>
-        <span class="cart-controls">
-          <button type="button" class="qty-dec" data-id={it.variationId} aria-label={`Remove one ${it.label}`}>–</button>
-          <output class="qty" data-id={it.variationId}>0</output>
-          <button type="button" class="qty-inc" data-id={it.variationId} aria-label={`Add one ${it.label}`}>+</button>
-        </span>
-      </li>
-    ))}
-  </ul>
+    <!-- CENTER: My cart (fluid, the main column) -->
+    <section class="hg-main card">
+      <header class="cart-head">
+        <span class="cart-head__title">My cart</span>
+        <a href="/menu" class="cart-head__add">+ Add more</a>
+      </header>
 
-  <button id="checkout" class="cta-primary" disabled>Checkout</button>
-  <p id="err" class="order-error" hidden></p>
+      <ul id="cart-lines" class="cart-lines"></ul>
 
-  <section class="order-footer">
-    <h2>How pickup works</h2>
-    <p>Pay online, then come to the counter — we'll have your order ready.</p>
-  </section>
+      <p id="cart-empty" class="cart-empty" hidden>
+        Your order is empty. <a href="/menu">Browse the menu</a> to add items.
+      </p>
+    </section>
+
+    <!-- RIGHT: Total + checkout (fixed) -->
+    <aside class="hg-right card">
+      <h2>Total</h2>
+      <dl class="summary-rows">
+        <div>
+          <dt>Items</dt>
+          <dd id="sum-count">0</dd>
+        </div>
+        <div class="summary-total">
+          <dt>Total</dt>
+          <dd>at&nbsp;checkout</dd>
+        </div>
+      </dl>
+
+      <button id="checkout" class="checkout-btn" disabled>Checkout</button>
+      <p id="order-err" class="order-error" hidden></p>
+    </aside>
+
+    <!-- LEFT: pickup info (fixed) -->
+    <aside class="hg-left card">
+      <h2>Pickup</h2>
+      <p class="pickup-line">Louis Joliet Mall food court</p>
+      <p class="pickup-muted">Enter through Cinemark</p>
+      <p class="pickup-muted">3340 Mall Loop Dr, Joliet, IL</p>
+      <hr class="pickup-rule" />
+      <p class="pickup-muted">Pay online, then come to the counter — we'll have your order ready.</p>
+    </aside>
+
+    <!-- FOOTER (spans all three) -->
+    <footer class="hg-footer">
+      Prices are confirmed securely on the next step. Orders are made fresh for pickup.
+    </footer>
+  </div>
 
   <script>
-    const qty = new Map();
-    const checkoutBtn = document.getElementById('checkout');
-    const errEl = document.getElementById('err');
+    import { getCart, setQty, cartCount } from '../lib/cart';
 
-    const refresh = () => {
-      const total = [...qty.values()].reduce((a, b) => a + b, 0);
-      checkoutBtn.disabled = total === 0;
+    const linesEl = document.getElementById('cart-lines');
+    const emptyEl = document.getElementById('cart-empty');
+    const countEl = document.getElementById('sum-count');
+    const btn = document.getElementById('checkout');
+    const errEl = document.getElementById('order-err');
+
+    const render = () => {
+      const cart = getCart();
+      linesEl.innerHTML = '';
+      for (const line of cart) {
+        const li = document.createElement('li');
+        li.className = 'cart-line';
+        li.innerHTML = `
+          <span class="line-tile" aria-hidden="true"></span>
+          <div class="line-body">
+            <span class="line-name"></span>
+            <button type="button" class="line-remove">Remove</button>
+          </div>
+          <div class="add-control is-in-cart">
+            <div class="ac-stepper">
+              <button type="button" class="ac-btn ac-dec" aria-label="Remove one">\u2039</button>
+              <span class="ac-count">${line.quantity}</span>
+              <button type="button" class="ac-btn ac-inc" aria-label="Add one">\u203A</button>
+            </div>
+          </div>`;
+        li.querySelector('.line-tile').textContent = (line.label.trim()[0] || '\u2022').toUpperCase();
+        li.querySelector('.line-name').textContent = line.label;
+        li.querySelector('.ac-dec').addEventListener('click', () => setQty(line.variationId, line.quantity - 1));
+        li.querySelector('.ac-inc').addEventListener('click', () => setQty(line.variationId, line.quantity + 1));
+        li.querySelector('.line-remove').addEventListener('click', () => setQty(line.variationId, 0));
+        linesEl.appendChild(li);
+      }
+      const empty = cart.length === 0;
+      emptyEl.hidden = !empty;
+      countEl.textContent = String(cartCount());
+      btn.disabled = empty;
     };
-    const setQty = (id, n) => {
-      const v = Math.max(0, n);
-      v === 0 ? qty.delete(id) : qty.set(id, v);
-      document.querySelector(`.qty[data-id="${id}"]`).textContent = String(v);
-      refresh();
-    };
 
-    document.getElementById('cart').addEventListener('click', (e) => {
-      const btn = e.target.closest('button'); if (!btn) return;
-      const id = btn.dataset.id;
-      if (btn.classList.contains('qty-inc')) setQty(id, (qty.get(id) || 0) + 1);
-      if (btn.classList.contains('qty-dec')) setQty(id, (qty.get(id) || 0) - 1);
-    });
-
-    checkoutBtn.addEventListener('click', async () => {
+    btn.addEventListener('click', async () => {
       errEl.hidden = true;
-      checkoutBtn.disabled = true; checkoutBtn.textContent = 'Starting…';
-      const lineItems = [...qty.entries()].map(([variationId, quantity]) => ({ variationId, quantity }));
+      btn.disabled = true; btn.textContent = 'Starting…';
+      const lineItems = getCart().map(({ variationId, quantity }) => ({ variationId, quantity }));
       try {
         const r = await fetch('/api/checkout', {
           method: 'POST',
@@ -244,11 +116,154 @@ const orderable = [
         });
         const data = await r.json();
         if (r.ok && data.url) { window.location.href = data.url; return; }
+        console.error('checkout failed:', data);
         throw new Error();
       } catch {
-        errEl.hidden = false; errEl.textContent = 'Could not start checkout. Please try again.';
-        checkoutBtn.disabled = false; checkoutBtn.textContent = 'Checkout';
+        errEl.hidden = false;
+        errEl.textContent = 'Could not start checkout. Please try again.';
+        btn.disabled = false; btn.textContent = 'Checkout';
       }
     });
+
+    window.addEventListener('cart-updated', render);
+    window.addEventListener('storage', render);
+    render();
   </script>
+
+  <style>
+    /* Keep the order page's field on-brand even if tokens.css didn't load. */
+    :global(body) {
+      background: var(--color-bg, #1a1611);
+      color: var(--color-text, #f7f1de);
+    }
+
+    /* ---------- Holy-grail grid ----------
+     * header spans all 3 · left (fixed) · main = My cart (fluid) · right (fixed)
+     * footer spans all 3 */
+    .order-hg {
+      display: grid;
+      gap: var(--space-6, 1.5rem);
+      grid-template-columns: 16rem minmax(0, 1fr) 21rem;
+      grid-template-areas:
+        "header header header"
+        "left   main   right"
+        "footer footer footer";
+      align-items: start;
+    }
+    .hg-header { grid-area: header; }
+    .hg-left   { grid-area: left; }
+    .hg-main   { grid-area: main; }
+    .hg-right  { grid-area: right; position: sticky; top: var(--space-6, 1.5rem); }
+    .hg-footer { grid-area: footer; }
+
+    /* Stack on narrow screens: title → cart → checkout → pickup → footer */
+    @media (max-width: 960px) {
+      .order-hg {
+        grid-template-columns: 1fr;
+        grid-template-areas:
+          "header"
+          "main"
+          "right"
+          "left"
+          "footer";
+      }
+      .hg-right { position: static; }
+    }
+
+    .card {
+      background: var(--color-surface, #262019);
+      border: 1px solid var(--color-charcoal-700, #3a3127);
+      border-radius: var(--radius-md, 4px);
+      padding: var(--space-6, 1.5rem);
+    }
+
+    /* ---------- header ---------- */
+    .back-link { display: inline-block; margin-bottom: var(--space-4, 1rem); color: var(--color-accent, #d4a017); text-decoration: none; font-family: var(--font-body, Georgia, serif); }
+    .back-link:hover { color: var(--color-mustard-400, #e8b837); }
+    .hg-header h1 { font-size: var(--fs-display-2, 2.5rem); margin: 0 0 var(--space-2, 0.5rem); color: var(--color-text, #f7f1de); }
+    .hg-sub { color: var(--color-text-muted, #beb39b); margin: 0; }
+
+    /* ---------- center: My cart ---------- */
+    .cart-head {
+      display: flex; align-items: center; justify-content: space-between;
+      padding-bottom: var(--space-4, 1rem);
+      border-bottom: 1px solid var(--color-charcoal-700, #3a3127);
+    }
+    .cart-head__title { font-family: var(--font-display, Georgia, serif); font-size: var(--fs-h3, 1.25rem); color: var(--color-text, #f7f1de); }
+    .cart-head__add { color: var(--color-accent, #d4a017); text-decoration: none; font-size: var(--fs-small, 0.875rem); }
+    .cart-head__add:hover { color: var(--color-mustard-400, #e8b837); }
+
+    .cart-lines { list-style: none; margin: 0; padding: 0; }
+
+    /* Runtime-created rows: scope the static parent, reach children with :global(). */
+    .cart-lines :global(.cart-line) {
+      display: flex; align-items: center; gap: var(--space-4, 1rem);
+      padding: var(--space-4, 1rem) 0;
+      border-bottom: 1px solid var(--color-charcoal-700, #3a3127);
+    }
+    .cart-lines :global(.cart-line:last-child) { border-bottom: none; }
+    .cart-lines :global(.line-tile) {
+      flex: 0 0 auto; width: 3rem; height: 3rem;
+      border-radius: var(--radius-sm, 2px);
+      background: var(--color-bg, #1a1611);
+      border: 1px solid var(--color-charcoal-700, #3a3127);
+      display: grid; place-items: center;
+      font-family: var(--font-display, Georgia, serif);
+      color: var(--color-accent, #d4a017); font-size: 1.15rem;
+    }
+    .cart-lines :global(.line-body) { flex: 1 1 auto; min-width: 0; }
+    .cart-lines :global(.line-name) { display: block; font-weight: 600; color: var(--color-text, #f7f1de); }
+    .cart-lines :global(.line-remove) {
+      margin-top: 2px; background: none; border: none; padding: 0;
+      color: var(--color-text-muted, #beb39b); font-size: var(--fs-small, 0.875rem);
+      cursor: pointer; text-decoration: underline;
+    }
+    .cart-lines :global(.line-remove:hover) { color: var(--color-accent-alt, #c8102e); }
+
+    .cart-empty { color: var(--color-text-muted, #beb39b); padding: var(--space-8, 2rem) 0; text-align: center; }
+    .cart-empty a { color: var(--color-accent, #d4a017); }
+
+    /* ---------- right: Total ---------- */
+    .hg-right h2 { font-size: var(--fs-h2, 1.875rem); margin: 0 0 var(--space-4, 1rem); color: var(--color-text, #f7f1de); }
+    .summary-rows { margin: 0 0 var(--space-6, 1.5rem); }
+    .summary-rows > div { display: flex; justify-content: space-between; align-items: baseline; padding: var(--space-2, 0.5rem) 0; }
+    .summary-rows dt { color: var(--color-text-muted, #beb39b); }
+    .summary-rows dd { margin: 0; font-weight: 600; color: var(--color-text, #f7f1de); }
+    .summary-total {
+      border-top: 1px solid var(--color-charcoal-700, #3a3127);
+      margin-top: var(--space-2, 0.5rem);
+      padding-top: var(--space-3, 0.75rem) !important;
+    }
+    .summary-total dt, .summary-total dd { font-family: var(--font-display, Georgia, serif); color: var(--color-text, #f7f1de); }
+
+    .checkout-btn {
+      width: 100%;
+      padding: var(--space-3, 0.75rem) var(--space-4, 1rem);
+      background: var(--color-accent, #d4a017);
+      color: var(--color-charcoal-900, #1a1611);
+      border: none; border-radius: var(--radius-sm, 2px);
+      font-family: var(--font-display, Georgia, serif);
+      text-transform: uppercase; letter-spacing: var(--tracking-uppercase, 0.06em);
+      font-size: var(--fs-body, 1.0625rem); cursor: pointer;
+      transition: transform 120ms ease, filter 120ms ease;
+    }
+    .checkout-btn:hover:not(:disabled) { transform: translateY(-1px); filter: brightness(1.04); }
+    .checkout-btn:disabled { opacity: 0.45; cursor: not-allowed; }
+    .order-error { margin: var(--space-3, 0.75rem) 0 0; color: var(--color-accent-alt, #c8102e); font-size: var(--fs-small, 0.875rem); }
+
+    /* ---------- left: pickup ---------- */
+    .hg-left h2 { font-size: var(--fs-h3, 1.25rem); margin: 0 0 var(--space-3, 0.75rem); color: var(--color-text, #f7f1de); }
+    .pickup-line { margin: 0 0 var(--space-1, 0.25rem); color: var(--color-text, #f7f1de); font-weight: 600; }
+    .pickup-muted { margin: 0 0 var(--space-2, 0.5rem); color: var(--color-text-muted, #beb39b); font-size: var(--fs-small, 0.875rem); line-height: var(--lh-base, 1.55); }
+    .pickup-rule { border: none; border-top: 1px solid var(--color-charcoal-700, #3a3127); margin: var(--space-4, 1rem) 0; }
+
+    /* ---------- footer ---------- */
+    .hg-footer {
+      border-top: 1px solid var(--color-charcoal-700, #3a3127);
+      padding-top: var(--space-4, 1rem);
+      color: var(--color-text-muted, #beb39b);
+      font-size: var(--fs-small, 0.875rem);
+      text-align: center;
+    }
+  </style>
 </BaseLayout>

@@ -1,0 +1,192 @@
+/* Kingdom Deli — globals.
+ *
+ * Light reset + prose defaults, form-control styling for the dark field, and the
+ * shared add-to-order control (.add-control / .ac-*) used by both the menu cards
+ * (MenuItem) and the /order cart list — defined globally so it styles elements
+ * created at runtime by cart.ts as well as server-rendered ones.
+ *
+ * Dark logo palette (see tokens.css). Variable names preserved; the field was
+ * lightened from near-black to a warm charcoal for readability.
+ */
+
+:root {
+  color-scheme: dark;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+.hero-image {
+  width: 100%;
+  height: 60vh;
+  object-fit: cover;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+ul[role='list'],
+ol[role='list'] {
+  list-style: none;
+  padding: 0;
+}
+
+/* Focus ring — visible gold against the dark field. */
+:focus-visible {
+  outline: 3px solid var(--color-mustard-400, currentColor);
+  outline-offset: 2px;
+}
+
+/* Form controls — sit on the lifted dark surface, not glaring white. */
+input,
+textarea,
+select {
+  background: var(--color-bg-alt);
+  color: var(--color-text);
+  border: 1px solid var(--color-charcoal-700);
+  border-radius: var(--radius-sm);
+  padding: var(--space-2) var(--space-3);
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: var(--color-text-muted);
+  opacity: 0.8;
+}
+
+/* Subtle dark scrollbar so it doesn't render as a bright track. */
+* {
+  scrollbar-color: var(--color-charcoal-700) transparent;
+}
+
+/* ============================================================
+ * Add-to-order control — shared by menu cards and the /order cart.
+ *   default        : a gold "+" circle
+ *   in cart        : a ‹ N › stepper (‹ removes one, › adds one)
+ *   most-recent     : a 🛒 shortcut to /order below the count (browse pages only)
+ * Defined globally so it also styles the controls cart.ts injects at runtime.
+ * ============================================================ */
+.add-control {
+  display: inline-flex;
+  flex-direction: column;   /* stepper on top, 🛒 below */
+  align-items: center;
+  gap: var(--space-1);
+  margin-inline-start: auto; /* push to the right within its row */
+}
+
+.ac-stepper {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.ac-btn {
+  flex: 0 0 auto;
+  width: 2rem;
+  height: 2rem;
+  border: none;
+  border-radius: 999px;
+  background: var(--color-accent);
+  color: var(--color-charcoal-900);   /* dark on gold = crisp */
+  font-size: 1.2rem;
+  line-height: 1;
+  font-weight: 700;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  transition: transform 120ms ease, filter 120ms ease, background-color 120ms ease;
+}
+.ac-btn:hover { filter: brightness(0.96); }
+.ac-btn:active { transform: scale(0.9); }
+
+/* the ‹ and › steppers read as outlined, the "+" stays solid */
+.ac-dec,
+.ac-inc {
+  background: transparent;
+  color: var(--color-accent);
+  border: 1.5px solid var(--color-accent);
+  font-size: 1.15rem;
+}
+.ac-dec:hover,
+.ac-inc:hover {
+  background: var(--color-accent);
+  color: var(--color-charcoal-900);
+  filter: none;
+}
+
+.ac-count {
+  min-width: 1.4rem;
+  text-align: center;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  color: var(--color-text);
+}
+
+.ac-cart {
+  font-size: 1.05rem;
+  line-height: 1;
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform 120ms ease;
+}
+.ac-cart:hover { transform: scale(1.15); }
+
+.add-control.pop { animation: ac-pop 200ms ease; }
+@keyframes ac-pop {
+  0% { transform: scale(1); }
+  45% { transform: scale(1.18); }
+  100% { transform: scale(1); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .add-control.pop { animation: none; }
+}
+
+/* Prose container — usable on any text-heavy section. */
+.prose {
+  max-width: 38rem;
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  line-height: var(--lh-loose);
+  color: var(--color-text);
+}
+
+.prose > * + * {
+  margin-top: var(--space-4);
+}
+
+.prose h2,
+.prose h3 {
+  font-family: var(--font-display);
+  margin-top: var(--space-8);
+  margin-bottom: var(--space-3);
+  line-height: var(--lh-snug);
+}
+
+.prose a {
+  color: var(--color-accent);
+  text-decoration: underline;
+  text-decoration-color: var(--color-mustard-600);
+  text-underline-offset: 0.15em;
+}
+
+.prose a:hover {
+  color: var(--color-mustard-400);
+  text-decoration-color: var(--color-mustard-400);
+}

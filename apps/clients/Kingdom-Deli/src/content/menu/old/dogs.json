@@ -1,0 +1,55 @@
+{
+  "category": {
+    "name": "Hot Dogs & Polish",
+    "slug": "dogs",
+    "displayOrder": 2,
+    "description": "Vienna Beef, dragged through the garden. The Chicago way."
+  },
+  "items": [
+    {
+      "id": "chicago-dog",
+      "name": "Chicago Style Hot Dog",
+      "description": "Vienna Beef dog dragged through the garden. Mustard, neon relish, chopped onion, tomato, sport peppers, pickle, celery salt. Poppy seed bun. No ketchup.",
+      "price": 8.99,
+      "noPork": false,
+      "isDessert": false,
+      "isSide": false,
+      "isPlate": false,
+      "isDeli": false,
+      "isDogs": true,
+      "isDrinks": false,
+      "available": true,
+      "featured": true,
+      "image": "/images/menu/chicago-dog.png"
+    },
+    {
+      "id": "polish",
+      "name": "Chicago Style Polish",
+      "description": "Vienna Beef polish with grilled onions, relish, mustard, and sport peppers. Served with fresh-cut fries.",
+      "price": 9.99,
+      "noPork": false,
+      "isDessert": false,
+      "isSide": false,
+      "isPlate": false,
+      "isDeli": false,
+      "isDogs": true,
+      "isDrinks": false,
+      "available": true,
+      "image": "/images/menu/polish.png"
+    },
+    {
+      "id": "maxwell-polish",
+      "name": "Maxwell Polish",
+      "description": "Beef polish with mustard, grilled onions, and peppers.",
+      "price": 10.99,
+      "noPork": false,
+      "isDessert": false,
+      "isSide": false,
+      "isPlate": false,
+      "isDeli": false,
+      "isDogs": true,
+      "isDrinks": false,
+      "available": true
+    }
+  ]
+}
