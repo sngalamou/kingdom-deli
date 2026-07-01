@@ -1,0 +1,1 @@
+import{c as r}from"./Header.astro_astro_type_script_index_0_lang.BZP7ruO8.js";r();const e=new URLSearchParams(window.location.search),t=e.get("orderId")||e.get("transactionId")||e.get("checkoutId");t&&(document.getElementById("order-ref-value").textContent=t,document.getElementById("order-ref").hidden=!1);
