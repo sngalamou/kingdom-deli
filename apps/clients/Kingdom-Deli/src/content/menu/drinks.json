@@ -12,7 +12,8 @@
       "description": "20 oz fountain soda. Coke, Diet Coke, Sprite, root beer, or lemonade.",
       "price": 3.99,
       "category": "drinks",
-      "available": true
+      "available": true,
+      "image": "/images/menu/soda-regular.png"
     },
     {
       "id": "soda-large",
@@ -20,7 +21,8 @@
       "description": "32 oz fountain soda. Coke, Diet Coke, Sprite, root beer, or lemonade.",
       "price": 4.99,
       "category": "drinks",
-      "available": true
+      "available": true,
+      "image": "/images/menu/soda-large.png"
     },
     {
       "id": "bottled-water",
@@ -36,8 +38,7 @@
       "description": "Sweet, refreshing lemonade made fresh daily. Regular, or large for $5.00.",
       "price": 3.0,
       "category": "drinks",
-      "available": true,
-      "image": "/images/menu/lemonade.svg"
+      "available": true
     }
   ]
 }
