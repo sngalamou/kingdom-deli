@@ -11,41 +11,25 @@
       "name": "Soda (Regular)",
       "description": "20 oz fountain soda. Coke, Diet Coke, Sprite, root beer, or lemonade.",
       "price": 3.99,
-      "noPork": false,
-      "isDessert": false,
-      "isSide": false,
-      "isPlate": false,
-      "isDeli": false,
-      "isDogs": false,
-      "isDrinks": true,
-      "available": true
+      "category": "drinks",
+      "available": true,
+      "image": "/images/menu/soda-regular.png"
     },
     {
       "id": "soda-large",
       "name": "Soda (Large)",
       "description": "32 oz fountain soda. Coke, Diet Coke, Sprite, root beer, or lemonade.",
       "price": 4.99,
-      "noPork": false,
-      "isDessert": false,
-      "isSide": false,
-      "isPlate": false,
-      "isDeli": false,
-      "isDogs": false,
-      "isDrinks": true,
-      "available": true
+      "category": "drinks",
+      "available": true,
+      "image": "/images/menu/soda-large.png"
     },
     {
       "id": "bottled-water",
       "name": "Bottled Water",
       "description": "Bottled water.",
       "price": 1.79,
-      "noPork": false,
-      "isDessert": false,
-      "isSide": false,
-      "isPlate": false,
-      "isDeli": false,
-      "isDogs": false,
-      "isDrinks": true,
+      "category": "drinks",
       "available": true
     },
     {
@@ -53,15 +37,8 @@
       "name": "Lemonade",
       "description": "Sweet, refreshing lemonade made fresh daily. Regular, or large for $5.00.",
       "price": 3.0,
-      "noPork": false,
-      "isDessert": false,
-      "isSide": false,
-      "isPlate": false,
-      "isDeli": false,
-      "isDogs": false,
-      "isDrinks": true,
-      "available": true,
-      "image": "/images/menu/lemonade.svg"
+      "category": "drinks",
+      "available": true
     }
   ]
 }

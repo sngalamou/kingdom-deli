@@ -200,6 +200,36 @@ declare module 'astro:content' {
   collection: "menu";
   data: any
 };
+"older/bakery": {
+	id: "older/bakery";
+  collection: "menu";
+  data: any
+};
+"older/deli": {
+	id: "older/deli";
+  collection: "menu";
+  data: any
+};
+"older/dogs": {
+	id: "older/dogs";
+  collection: "menu";
+  data: any
+};
+"older/drinks": {
+	id: "older/drinks";
+  collection: "menu";
+  data: any
+};
+"older/plates": {
+	id: "older/plates";
+  collection: "menu";
+  data: any
+};
+"older/sides": {
+	id: "older/sides";
+  collection: "menu";
+  data: any
+};
 "plates": {
 	id: "plates";
   collection: "menu";

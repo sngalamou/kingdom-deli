@@ -13,7 +13,7 @@
       "price": 4.99,
       "category": "sides",
       "available": true,
-      "image": "/images/menu/fries.svg"
+      "image": "/images/menu/fries.png"
     },
     {
       "id": "cheese-fries",

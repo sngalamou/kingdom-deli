@@ -1,0 +1,97 @@
+{
+  "category": {
+    "name": "From the Bakery",
+    "slug": "bakery",
+    "displayOrder": 6,
+    "description": "Cakes and cookies. Whole cakes for pickup with 48 hours notice."
+  },
+  "items": [
+    {
+      "id": "butter-cookie",
+      "name": "Old-Fashioned Butter Cookies",
+      "description": "Soft, cakey, pink-frosted. The one from the Chicago lunchroom tray.",
+      "price": 4.99,
+      "noPork": false,
+      "isDessert": true,
+      "isSide": false,
+      "isPlate": false,
+      "isDeli": false,
+      "isDogs": false,
+      "isDrinks": false,
+      "available": true,
+      "featured": true,
+      "image": "/images/menu/butter-cookie-single.jpg"
+    },
+    {
+      "id": "cakes",
+      "name": "Cakes",
+      "description": "Custom specialty cakes for birthdays, anniversaries, and special occasions. 48 hours notice.",
+      "price": 4.99,
+      "noPork": false,
+      "isDessert": true,
+      "isSide": false,
+      "isPlate": false,
+      "isDeli": false,
+      "isDogs": false,
+      "isDrinks": false,
+      "available": true,
+      "image": "/images/menu/specialty-cake.svg"
+    },
+    {
+      "id": "chocolate-cake",
+      "name": "Chocolate Cake",
+      "description": "Three-layer chocolate cake with rich chocolate frosting. Slice or whole.",
+      "price": 4.99,
+      "noPork": false,
+      "isDessert": true,
+      "isSide": false,
+      "isPlate": false,
+      "isDeli": false,
+      "isDogs": false,
+      "isDrinks": false,
+      "available": true
+    },
+    {
+      "id": "german-chocolate-cake",
+      "name": "German Chocolate Cake",
+      "description": "Three-layer chocolate cake with coconut-pecan frosting. Slice or whole.",
+      "price": 4.99,
+      "noPork": false,
+      "isDessert": true,
+      "isSide": false,
+      "isPlate": false,
+      "isDeli": false,
+      "isDogs": false,
+      "isDrinks": false,
+      "available": true
+    },
+    {
+      "id": "coconut-cake",
+      "name": "Coconut Cake",
+      "description": "Moist coconut layer cake with cream cheese frosting and toasted coconut. Slice or whole.",
+      "price": 4.99,
+      "noPork": false,
+      "isDessert": true,
+      "isSide": false,
+      "isPlate": false,
+      "isDeli": false,
+      "isDogs": false,
+      "isDrinks": false,
+      "available": true
+    },
+    {
+      "id": "pound-cake",
+      "name": "Pound Cake",
+      "description": "Dense, buttery pound cake. Slice or whole.",
+      "price": 4.99,
+      "noPork": false,
+      "isDessert": true,
+      "isSide": false,
+      "isPlate": false,
+      "isDeli": false,
+      "isDogs": false,
+      "isDrinks": false,
+      "available": true
+    }
+  ]
+}

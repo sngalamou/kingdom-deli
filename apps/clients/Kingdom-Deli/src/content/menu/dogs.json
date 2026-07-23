@@ -23,7 +23,7 @@
       "price": 9.99,
       "category": "dogs",
       "available": true,
-      "image": "/images/menu/polish.png"
+      "image": "/images/menu/chicago-polish.png"
     },
     {
       "id": "maxwell-polish",
@@ -31,7 +31,8 @@
       "description": "Beef polish with mustard, grilled onions, and peppers.",
       "price": 10.99,
       "category": "dogs",
-      "available": true
+      "available": true,
+      "image": "/images/menu/maxwell-polish.png"
     }
   ]
 }

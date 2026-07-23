@@ -14,7 +14,7 @@
       "category": "deli",
       "available": true,
       "featured": true,
-      "image": "/images/menu/corned-beef.jpg"
+      "image": "/images/menu/corned-beef.png"
     },
     {
       "id": "pastrami",
@@ -24,7 +24,7 @@
       "category": "deli",
       "available": true,
       "featured": true,
-      "image": "/images/menu/pastrami.jpg"
+      "image": "/images/menu/pastrami.png"
     },
     {
       "id": "italian-beef",
@@ -57,7 +57,8 @@
       "description": "Grilled chicken with lettuce, tomato, cheese, and ranch in a flour wrap.",
       "price": 10.99,
       "category": "deli",
-      "available": true
+      "available": true,
+      "image": "/images/menu/chicken-wrap.png"
     },
     {
       "id": "veggie-wrap",
@@ -65,7 +66,8 @@
       "description": "Lettuce, tomato, onion, cucumber, peppers, cheese, and ranch in a flour wrap.",
       "price": 7.99,
       "category": "deli",
-      "available": true
+      "available": true,
+      "image": "/images/menu/veggie-wrap.png"
     },
     {
       "id": "jerk-wrap",
@@ -73,7 +75,8 @@
       "description": "Jerk chicken with lettuce, tomato, slaw, and jerk aioli in a flour wrap.",
       "price": 11.99,
       "category": "deli",
-      "available": true
+      "available": true,
+      "image": "/images/menu/jerk-wrap.png"
     },
     {
       "id": "jerk-philly",
@@ -81,7 +84,8 @@
       "description": "Jerk chicken with grilled onions, peppers, and melted cheese on a hoagie roll.",
       "price": 12.99,
       "category": "deli",
-      "available": true
+      "available": true,
+      "image": "/images/menu/jerk-philly.png"
     }
   ]
 }
