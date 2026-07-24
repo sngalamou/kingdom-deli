@@ -1,31 +1,33 @@
 // Menu loader.
-// C:\Users\sngalamou\dev\ngc\kingdom-deli\apps\clients\Kingdom-Deli\src\lib
+//
 // Reads the 6 JSON files in src/content/menu/, returns categories sorted by
 // displayOrder. Each category has its items inline.
 //
 // When Sanity is provisioned, swap this file's implementation to query Sanity —
 // the consumer (menu.astro) doesn't need to change.
 
-import deli from '../content/menu/deli.json';
-import dogs from '../content/menu/dogs.json';
-import plates from '../content/menu/plates.json';
-import sides from '../content/menu/sides.json';
-import drinks from '../content/menu/drinks.json';
-import bakery from '../content/menu/bakery.json';
-
-/** The six menu sections. An item's badge is derived from this. */
-export type CategorySlug = 'deli' | 'dogs' | 'plates' | 'sides' | 'drinks' | 'bakery';
+import deli from '../../content/menu/deli.json';
+import dogs from '../../content/menu/dogs.json';
+import plates from '../../content/menu/plates.json';
+import sides from '../../content/menu/sides.json';
+import drinks from '../../content/menu/drinks.json';
+import bakery from '../../content/menu/bakery.json';
 
 export interface MenuItem {
   id: string;
   name: string;
   description?: string;
   price: number;
-  /** Drives the category badge (and, for 'dogs', the No-Pork stamp). */
-  category: CategorySlug;
+  noPork: boolean;
+  isDeli: boolean;
+  isDessert: boolean;
+  isDogs: boolean;
+  isDrinks: boolean;
+  isPlate: boolean;
+  isSide: boolean;
+  squareSku?: string;
   available: boolean;
   featured?: boolean;
-  image?: string;
 }
 
 export interface MenuCategory {

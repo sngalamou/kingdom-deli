@@ -1,5 +1,6 @@
 ---
 // Menu — Kingdom Deli
+// C:\Users\sngalamou\dev\ngc\kingdom-deli\apps\clients\Kingdom-Deli\src\pages
 // Renders all menu items grouped by category, ordered by category.displayOrder.
 //
 // Badges are derived from each item's `category` slug via CategoryBadge:
@@ -69,7 +70,7 @@ const categories = getMenu();
         </header>
         <div class="menu-grid">
           {cat.items.map((item) => (
-            <MenuItem item={{ name: item.name, description: item.description, price: item.price, category: item.category, variationId: resolveVariationId(item.name) }}>
+            <MenuItem item={{ name: item.name, description: item.description, price: item.price, category: item.category, image: item.image, variationId: resolveVariationId(item.name) }}>
               <CategoryBadge slot="badge" category={item.category} />
             </MenuItem>
           ))}

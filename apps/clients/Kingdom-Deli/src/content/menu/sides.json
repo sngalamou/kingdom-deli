@@ -22,7 +22,7 @@
       "price": 5.99,
       "category": "sides",
       "available": true,
-      "image": "/images/menu/loaded-fries.jpg"
+      "image": "/images/menu/cheese-fries.jpg"
     },
     {
       "id": "slaw",
@@ -39,7 +39,8 @@
       "description": "Add fresh-cut fries and a fountain soda to any sandwich, wrap, or wings order.",
       "price": 1.99,
       "category": "sides",
-      "available": true
+      "available": true,
+      "image": "/images/menu/fries.png"
     }
   ]
 }

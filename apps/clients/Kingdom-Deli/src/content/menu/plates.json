@@ -22,7 +22,8 @@
       "description": "Marinated jerk chicken, slow-cooked. Served with rice and peas, plantains, and slaw.",
       "price": 9.99,
       "category": "plates",
-      "available": true
+      "available": false,
+      "image": "/images/menu/jerk-chicken-plate.png"
     },
     {
       "id": "chicken-waffles",
@@ -30,7 +31,8 @@
       "description": "Chicken wings with waffles and syrup.",
       "price": 12.99,
       "category": "plates",
-      "available": true
+      "available": true,
+      "image": "/images/menu/chicken-waffles.png"
     },
     {
       "id": "chicken-mild-sauce",
@@ -38,7 +40,8 @@
       "description": "Crispy fried chicken in mild sauce, served over fresh-cut fries. South side classic.",
       "price": 8.99,
       "category": "plates",
-      "available": true
+      "available": false,
+      "image": "/images/menu/chicken-waffles.png"
     },
     {
       "id": "chicken-on-a-stick",
@@ -82,7 +85,8 @@
       "description": "Four jumbo chicken wings plus jerk chicken tips. Comes with fries and a fountain soda.",
       "price": 15.99,
       "category": "plates",
-      "available": true
+      "available": true,
+      "image": "/images/menu/wing-tip-combo.png"
     },
     {
       "id": "pizza-puffs",
@@ -99,7 +103,7 @@
       "description": "Three soft tacos with beef, onion, and cilantro on a corn tortilla. Also available as a Taco Dinner \u2014 $16.99.",
       "price": 11.99,
       "category": "plates",
-      "available": true,
+      "available": false,
       "image": "/images/menu/beef-tacos.svg"
     },
     {
@@ -122,7 +126,7 @@
     },
     {
       "id": "jerk-tacos",
-      "name": "Jerk Tacos (3)",
+      "name": "Jerk Tacos",
       "description": "Three soft tacos with jerk chicken, slaw, jerk aioli, and lime.",
       "price": 11.99,
       "category": "plates",
@@ -135,7 +139,7 @@
       "description": "Three traditional tacos with seasoned beef, onion, cilantro, and lime on corn tortillas.",
       "price": 8.99,
       "category": "plates",
-      "available": true
+      "available": false
     }
   ]
 }

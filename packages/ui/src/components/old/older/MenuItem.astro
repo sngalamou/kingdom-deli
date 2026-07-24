@@ -1,17 +1,13 @@
 ---
 // @ngc/ui/components/MenuItem — shared, app-agnostic. NO cart import (package boundary).
-// C:\Users\sngalamou\dev\ngc\kingdom-deli\packages\ui\src\components
 // Emits a [data-add-control] container with a default "+"; the consuming app's
-// cart.ts repaints it into a ✕ ‹ N › stepper (and a 🛒 shortcut on the most-recent
+// cart.ts repaints it into a ‹ N › stepper (and a 🛒 shortcut on the most-recent
 // item) via initAddButtons(). Control styles live in the app's globals.css so the
 // same control renders identically on menu cards and in the /order cart list.
 //
 // Category-driven styling: pass `category` (deli|dogs|plates|sides|drinks|bakery)
 // and the card picks up its `.menu-item--<category>` variant. The badge itself is
 // rendered by the consumer into the "badge" slot (see CategoryBadge.astro).
-//
-// The image area is only rendered when an image is supplied — otherwise the card is
-// a compact text card (no empty placeholder box).
 interface MenuItemImage { asset?: unknown; alt?: string; url?: string; }
 interface MenuItemData {
   name: string;
@@ -26,16 +22,15 @@ const { item } = Astro.props;
 const hasImage = !!item.image?.url;
 const variantClass = [
   'menu-item',
-  hasImage ? null : 'menu-item--no-image',
   item.category ? `menu-item--${item.category.toLowerCase()}` : null,
 ].filter(Boolean).join(' ');
 ---
 <article class={variantClass}>
-  {hasImage && (
-    <div class="menu-item-image">
-      <img src={item.image?.url} alt={item.image?.alt ?? item.name} loading="lazy" />
-    </div>
-  )}
+  <div class="menu-item-image">
+    {hasImage
+      ? <img src={item.image?.url} alt={item.image?.alt ?? item.name} loading="lazy" />
+      : <div class="image-placeholder" aria-hidden="true" />}
+  </div>
   <div class="menu-item-body">
     <header class="menu-item-header">
       <h3 class="menu-item-name">{item.name}</h3>
@@ -60,16 +55,14 @@ const variantClass = [
 
 <style>
   .menu-item { background: var(--color-surface); border: 1px solid var(--color-charcoal-700); border-radius: 4px; overflow: hidden; display: flex; flex-direction: column; }
-  .menu-item-image { width: 100%; aspect-ratio: 1 / 1; display: block; overflow: hidden; }
-  /* object-fit only applies to replaced elements - it must live on the <img>, not the wrapper. */
-  .menu-item-image img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .menu-item-image { width: 100%; aspect-ratio: 1 / 1; object-fit: cover; display: block; }
   .menu-item-body { padding: var(--space-4); flex: 1; display: flex; flex-direction: column; gap: var(--space-2); }
   .menu-item-header { display: flex; justify-content: space-between; align-items: baseline; gap: var(--space-3); }
   .menu-item-name { font-size: var(--fs-h3); margin: 0; color: var(--color-text); }
   .menu-item-price { font-family: Georgia, 'Times New Roman', serif; font-weight: 700; color: var(--color-accent); white-space: nowrap; }
   .menu-item-description { margin: 0; font-size: var(--fs-small); color: var(--color-text-muted); font-style: italic; }
-  /* actions row: badge on the left, add-control pushed to the right; pinned to card bottom */
-  .menu-item-actions { display: flex; align-items: center; gap: var(--space-2); margin-top: auto; padding-top: var(--space-3); }
+  /* actions row: badge on the left, add-control pushed to the right */
+  .menu-item-actions { display: flex; align-items: center; gap: var(--space-2); margin-top: var(--space-3); }
   .menu-item--dogs { border-left: 4px solid var(--color-accent-alt); }
   .menu-item--plates { border: 1px solid var(--color-charcoal-700); }
   .menu-item--sides .menu-item-name { font-size: var(--fs-h4); }

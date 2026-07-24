@@ -30,7 +30,8 @@
       "description": "Bottled water.",
       "price": 1.79,
       "category": "drinks",
-      "available": true
+      "available": true,
+      "image": "/images/menu/bottled-water.png"
     },
     {
       "id": "lemonade",
@@ -38,7 +39,8 @@
       "description": "Sweet, refreshing lemonade made fresh daily. Regular, or large for $5.00.",
       "price": 3.0,
       "category": "drinks",
-      "available": true
+      "available": false,
+      "image": "/images/menu/lemonade.png"
     }
   ]
 }

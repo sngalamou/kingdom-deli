@@ -22,7 +22,7 @@
       "description": "Custom specialty cakes for birthdays, anniversaries, and special occasions. 48 hours notice.",
       "price": 4.99,
       "category": "bakery",
-      "available": true,
+      "available": false,
       "image": "/images/menu/specialty-cake.svg"
     },
     {
@@ -31,7 +31,8 @@
       "description": "Three-layer chocolate cake with rich chocolate frosting. Slice or whole.",
       "price": 4.99,
       "category": "bakery",
-      "available": true
+      "available": false,
+      "image": "images/menu/chocolate-cake.png"
     },
     {
       "id": "german-chocolate-cake",
@@ -39,7 +40,8 @@
       "description": "Three-layer chocolate cake with coconut-pecan frosting. Slice or whole.",
       "price": 4.99,
       "category": "bakery",
-      "available": true
+      "available": false,
+      "image": "images/menu/german-chocolate-cake.png"
     },
     {
       "id": "coconut-cake",
@@ -47,7 +49,8 @@
       "description": "Moist coconut layer cake with cream cheese frosting and toasted coconut. Slice or whole.",
       "price": 4.99,
       "category": "bakery",
-      "available": true
+      "available": false,
+      "image": "images/menu/coconut-cake.png"
     },
     {
       "id": "pound-cake",
@@ -55,7 +58,8 @@
       "description": "Dense, buttery pound cake. Slice or whole.",
       "price": 4.99,
       "category": "bakery",
-      "available": true
+      "available": false,
+      "image": "images/menu/pound-cake.png"
     }
   ]
 }
