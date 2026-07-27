@@ -14,7 +14,7 @@
       "category": "plates",
       "available": true,
       "featured": true,
-      "image": "/images/menu/jerk-chicken-tips.png"
+      "image": "/images/menu/jerk-tips.png"
     },
     {
       "id": "jamaica-jerk-chicken",
@@ -41,7 +41,7 @@
       "price": 8.99,
       "category": "plates",
       "available": false,
-      "image": "/images/menu/chicken-waffles.png"
+      "image": "/images/menu/chicken-mild-sauce.png"
     },
     {
       "id": "chicken-on-a-stick",
@@ -68,7 +68,7 @@
       "price": 8.99,
       "category": "plates",
       "available": true,
-      "image": "/images/menu/wings.png"
+      "image": "/images/menu/four-chicken-wings.png"
     },
     {
       "id": "chicken-wings-6pc",
@@ -77,7 +77,7 @@
       "price": 10.99,
       "category": "plates",
       "available": true,
-      "image": "/images/menu/wings.png"
+      "image": "/images/menu/six-chicken-wings.png"
     },
     {
       "id": "wing-tip-combo",

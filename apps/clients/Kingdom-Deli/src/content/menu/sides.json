@@ -22,7 +22,7 @@
       "price": 5.99,
       "category": "sides",
       "available": true,
-      "image": "/images/menu/cheese-fries.jpg"
+      "image": "/images/menu/cheese-fries.png"
     },
     {
       "id": "slaw",
@@ -31,7 +31,7 @@
       "price": 4.99,
       "category": "sides",
       "available": true,
-      "image": "/images/menu/cole-slaw.svg"
+      "image": "/images/menu/cole-slaw.png"
     },
     {
       "id": "add-combo",
@@ -40,7 +40,7 @@
       "price": 1.99,
       "category": "sides",
       "available": true,
-      "image": "/images/menu/fries.png"
+      "image": "/images/menu/add-combo.png"
     }
   ]
 }
