@@ -4,7 +4,7 @@
   "private": true,
   "description": "Ngalamou Consultancy productized client delivery monorepo. Shared packages + per-client workspaces.",
   "type": "module",
-  "packageManager": "pnpm@9.15.0",
+  "packageManager": "pnpm@11.22.0",
   "scripts": {
     "dev": "turbo run dev",
     "build": "turbo run build",
